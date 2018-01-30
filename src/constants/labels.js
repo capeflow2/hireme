@@ -5,8 +5,8 @@ const labels = {
   REGISTER_ORGANISATION: "Register Organisation",
   ENTER_ORG_NAME_PLACEHOLDER: "Enter your Organisation name",
   ENTER_ORG_NAME: "Org name",
-  ENTER_EMAIL_PLACEHOLDER: "Enter Email Address",
-  ENTER_EMAIL: "Email",
+  ENTER_REGNO_PLACEHOLDER: "Enter Registration Address",
+  ENTER_REGNO: "RegNo",
 }
 
 export default labels;

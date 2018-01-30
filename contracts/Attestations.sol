@@ -2,9 +2,8 @@ pragma solidity ^0.4.17;
 
 contract Attestation {
 
-  //mapping (address => Organisation) public organisations;
+  address private owner;
   Organisation[] public orgs;
-  //uint orgCount = 1;
 
   event OrganisationAdded(address indexed orgAddress, string uportId, string name);
 
@@ -13,6 +12,10 @@ contract Attestation {
     string name;
     string registrationNumber;
     string uportId;
+  }
+
+  function Attestation() public {
+    owner = msg.sender;
   }
 
   function addOrganisation(string uportId, string name,string registrationNumber) public {
@@ -28,11 +31,6 @@ contract Attestation {
     orgs.push(org);
 
     OrganisationAdded(msg.sender, uportId, name);
-    //orgs[orgCount] = org;
-
-    //organisations[msg.sender] = org;
-
-
   }
 
 

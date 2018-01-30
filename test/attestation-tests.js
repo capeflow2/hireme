@@ -18,18 +18,16 @@ contract('Attestation', function(accounts) {
       var name = "T";
       var registrationNumber = "12";
 
-      contract.OrganisationAdded([accounts[0], uportId], async (err, result) => {
-        console.log('contract result', result);
+      var events = contract.OrganisationAdded([accounts[0], uportId], async (err, result) => {
         assert(result.args.orgAddress === accounts[0]);
         assert(result.args.uportId === uportId);
         assert(result.args.name === name);
 
         var orgsCount = await contract.getOrgsCount.call();
 
-        for (var i = 0; i < orgsCount.toNumber(); i++){
-          var org = await contract.orgs.call(0);
-          console.log('org', org);
-        }
+        assert(orgsCount.toNumber() === 1);
+
+        events.stopWatching();
 
         resolve();
       });
@@ -47,14 +45,21 @@ contract('Attestation', function(accounts) {
     var name = "T";
     var registrationNumber = "12";
 
+
+    await contract.addOrganisation("org1", "org1", "1");
+
     var orgsCount = await contract.getOrgsCount.call();
 
+    assert(orgsCount == 2);
+
     for (var i = 0; i < orgsCount.toNumber(); i++){
-      var org = await contract.orgs.call(0);
-      console.log('org', org);
+      var org = await contract.orgs.call(i);
+      assert(org[1]);
     }
 
-    contract.addOrganisation(uportId, name, registrationNumber);
+    org[0].name === "T";
+    org[1].name === "org1";
+
   });
 
 });
