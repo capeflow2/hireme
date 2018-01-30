@@ -12,7 +12,7 @@ import '../../css/pure-min.css'
 import './App.css'
 
 const App = (props) => (
-    <div>
+    <div className="full-height">
       <Route exact path="/" component={Home} />
       <Route exact path="/attest" component={Attest} />
     </div>

@@ -11,10 +11,10 @@ import LoginButtonContainer from '../../user/ui/loginbutton/LoginButtonContainer
 import LogoutButtonContainer from '../../user/ui/logoutbutton/LogoutButtonContainer'
 
 const OnlyAuthLinks =
-    <div class="dashboard-buttons">
-        <Link to="/attest" className="">{labels.ADD_PROOF_OF_SKILL}</Link>
-        <Link to="/dashboard" className="pure-menu-link">{ labels.REGISTER_AS_ORG }</Link>
-        <Link to="/profile" className="pure-menu-link">{labels.VIEW_PROFILE}</Link>
+    <div class="full-height dashboard-buttons">
+        <Link to="/attest" className="btn">{ labels.ADD_PROOF_OF_SKILL }</Link>
+        <Link to="/dashboard" className="btn">{ labels.REGISTER_AS_ORG }</Link>
+        <Link to="/profile" className="btn">{ labels.VIEW_PROFILE }</Link>
         <LogoutButtonContainer />
     </div>;
 
@@ -29,7 +29,7 @@ class Home extends Component {
     render(){
         var {profile}= this.props;
         return (
-        <div>
+        <div class="full-height">
             {this.props.profile ? OnlyAuthLinks : null }
         </div>);
     }
