@@ -2,9 +2,11 @@ import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 import user from './user'
 import registerOrganisation from './register-organisation'
+import claims from './claims'
 
 export default combineReducers({
   router: routerReducer,
   user,
-  registerOrganisation
+  registerOrganisation,
+  claims
 })

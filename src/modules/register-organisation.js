@@ -3,6 +3,8 @@ import attestationContract from '../abis/Attestation.json';
 import Web3 from 'web3';
 import Accounts from 'web3-eth-accounts';
 
+import {getAttestationContract} from '../util/web3.js';
+
 const ADD_ORG_ERROR = "ADD_ORG_ERROR";
 const ADD_ORG_INITIATED = "ADD_ORG_INITIATED";
 const ADD_ORG_COMPLETED = "ADD_ORG_COMPLETED";
@@ -51,7 +53,9 @@ export const registerOrg = (uportId, name, registrationNumber) => {
   return async dispatch => {
     var accounts = new Accounts(web3);
 
-    var contract = new web3.eth.Contract(attestationContract.abi, "0x12334cFF2F19cc1a86FDfb7c1516242dF75ecE9e");
+    //var contract = new web3.eth.Contract(attestationContract.abi, "0x12334cFF2F19cc1a86FDfb7c1516242dF75ecE9e");
+
+    var contract = getAttestationContract();
 
     dispatch({type: ADD_ORG_INITIATED});
     web3.eth.getAccounts(function(err, accounts){

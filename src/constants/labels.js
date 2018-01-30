@@ -7,6 +7,10 @@ const labels = {
   ENTER_ORG_NAME: "Org name",
   ENTER_REGNO_PLACEHOLDER: "Enter Registration Address",
   ENTER_REGNO: "RegNo",
+  SELECT_ORGANISATION: "Select Org",
+  ENTER_CLAIM: "Your Claim",
+  ENTER_CLAIM_PLACEHOLDER: "Your Claim",
+  SUBMIT_PROOF_OF_SKILL: "Submit Proof Of Skill"
 }
 
 export default labels;
