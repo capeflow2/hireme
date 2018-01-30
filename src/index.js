@@ -14,7 +14,7 @@ render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
-        <App />
+        <App user={store.user} />
       </div>
     </ConnectedRouter>
   </Provider>,

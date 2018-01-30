@@ -1,5 +1,5 @@
 import { uport } from './../../../util/connectors.js'
-import { browserHistory } from 'react-router'
+import { BrowserRouter } from 'react-router-dom'
 
 export const USER_LOGGED_IN = 'USER_LOGGED_IN'
 
@@ -11,7 +11,6 @@ function userLoggedIn(user) {
 }
 
 export function loginUser() {
-
   return async function(dispatch) {
     // UPort and its web3 instance are defined in ./../../../util/wrappers.
     // Request uPort persona of account passed via QR
@@ -21,7 +20,9 @@ export function loginUser() {
       //move this check to something more convenient
 
       if (localStorage['credentials']){
-        credentials = JSON.parse(localStorage['credentials']);
+        var creds = localStorage['credentials'];
+        console.log('c', creds);
+        credentials = JSON.parse(creds);
       } else {
         credentials = await uport.requestCredentials({
           requested: ['name', 'avatar', 'phone', 'country'],
@@ -37,14 +38,14 @@ export function loginUser() {
 
       // Used a manual redirect here as opposed to a wrapper.
       // This way, once logged in a user can still access the home page.
-      var currentLocation = browserHistory.getCurrentLocation()
+      //var currentLocation = BrowserRouter.getCurrentLocation()
 
-      if ('redirect' in currentLocation.query)
-      {
-        return browserHistory.push(decodeURIComponent(currentLocation.query.redirect))
-      }
+      //if ('redirect' in currentLocation.query)
+      //{
+        //return BrowserRouter.push(decodeURIComponent(currentLocation.query.redirect))
+      //}
 
-      return browserHistory.push('/dashboard')
+      //return BrowserRouter.push('/dashboard')
 
 
     }catch(e){
