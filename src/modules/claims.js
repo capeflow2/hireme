@@ -38,8 +38,8 @@ export function getOrganisations(){
 
     for (var i = 0; i < count; i++){
       var org = await contract.methods.orgs(i).call();
-      if (org.name){
-        console.log('org', org);
+      console.log("org = ", org);
+      if (org.name && org.owner){
         organisations.push({name:org.name, orgAddress:org.owner, uportId: org.uportId, registrationNumber: org.registrationNumber});
       }
     }

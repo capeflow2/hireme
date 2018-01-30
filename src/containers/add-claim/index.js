@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import { getOrganisations } from '../../modules/claims';
+import { getOrganisations, addClaim } from '../../modules/claims';
 import { bindActionCreators } from 'redux'
 import {Redirect} from 'react-router-dom';
 import labels from '../../constants/labels';
@@ -13,8 +13,8 @@ class AddClaim extends Component{
 
     this.state = {
       uportId : props.profile ? props.profile.address : "",
-      credentialName : "",
-      credentialValue : ""
+      name : "",
+      orgAddress : ""
     };
 
   }
@@ -39,26 +39,35 @@ class AddClaim extends Component{
     this.setState(newState);
   }
 
-  submitAttestation(event){
-      event.preventDefault();
+  submit(){
 
-    var { uportId, credentialName, credentialValue} = this.state;
-    this.props.attest(uportId, credentialName, credentialName);
 
+      //export function addClaim(name, orgAddress, isPublic, uportId) {
+      var { uportId, name, orgAddress} = this.state;
+
+      if (!orgAddress){
+          alert("Please select an organisation address");
+          return;
+      }
+
+      if (!name){
+          alert("Please select a name");
+          return;
+      }
+
+      debugger;
+      this.props.addClaim(name, orgAddress, true, uportId);
   }
 
   render(){
-
       var a = this.props;
 
-
       if (!this.props.profile) {
-              return (<Redirect to={{
-                  pathname: '/',
-                  state: { from: this.props.location }
-              }}/>);
-          }
-
+          return (<Redirect to={{
+              pathname: '/',
+              state: { from: this.props.location }
+          }}/>);
+      }
       else if (this.props.claims.busy || !this.props.claims.organisations){
           return (<div className="full-height center-container">
               <RingLoader
@@ -70,24 +79,24 @@ class AddClaim extends Component{
           </div>);
       }else if (this.props.claims.organisations){
           return (
-          <div className="full-height center-container">
+              <div className="full-height center-container">
                   <form className="contact100-form validate-form">
                       <div className="wrap-input100 validate-input" data-validate="Name is required">
                           <span className="label-input100">{labels.SELECT_ORGANISATION}</span>
-              <select>
-                  {this.props.claims.organisations.map(o => <option key={o.name} value={o.uportId}>{o.name}</option>)}
-              </select>
+                          <select name="orgAddress" onChange={(e) => this.setInputValue(e)} value={this.state.orgAddress}>
+                              <option value="">Please select </option>
+                              {this.props.claims.organisations.map(o => <option key={o.orgAddress+o.name} value={o.orgAddress}>{o.name}</option>)}
+                          </select>
                       </div>
 
                       <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                           <span className="label-input100">{labels.ENTER_CLAIM}</span>
-
                           <input onChange={(e) => this.setInputValue(e)} className="input100" type="text" name="name" placeholder={labels.ENTER_CLAIM_PLACEHOLDER}/>
                           <span className="focus-input100"></span>
                       </div>
 
                       <div className="container-contact100-form-btn">
-                          <button onClick={(e) => {e.preventDefault(); this.registerOrg(); }} className="contact100-form-btn">
+                          <button onClick={(e) => {e.preventDefault(); this.submit(); }} className="contact100-form-btn">
 						                  <span>
 							                    {labels.SUBMIT_PROOF_OF_SKILL}
 							                    <i className="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -107,7 +116,7 @@ class AddClaim extends Component{
                       <input value={ this.state.credentialValue } type="text" name="credentialValue" id="credentialValue"  onChange={(e) => this.setInputValue(e)}/>
 
                       <button onClick={(e) => this.submitAttestation(e)}>Attest</button> */}
-          </div>
+              </div>
           );
           
       }
@@ -120,8 +129,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    getOrganisations
-        //attest
+    getOrganisations,
+    addClaim
     },dispatch);
 
 const AddClaimContainer = connect(
