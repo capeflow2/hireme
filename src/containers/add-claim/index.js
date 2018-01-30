@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import { attest } from '../../modules/attest';
+import { getOrganisations } from '../../modules/attest';
 import { bindActionCreators } from 'redux'
 import {Redirect} from 'react-router-dom';
 
@@ -8,8 +8,6 @@ class AddClaim extends Component{
 
   constructor(props){
     super(props);
-
-      console.log('props', props);
 
     this.state = {
       uportId : props.profile ? props.profile.address : "",
@@ -20,9 +18,7 @@ class AddClaim extends Component{
   }
 
     componentWillMount(){
-        if (!this.props.profile){
-            //this.props.loginUser();
-        }
+        this.props.getOrganisations();
     }
 
   setInputValue(event){
@@ -78,7 +74,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-        attest
+    getOrganisations
+        //attest
     },dispatch);
 
 const AddClaimContainer = connect(

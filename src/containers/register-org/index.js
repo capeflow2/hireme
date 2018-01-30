@@ -40,37 +40,52 @@ class RegisterOrg extends Component {
   }
 
   render(){
-    return (
-      <div className="contact-reg center-container full-height">
-			<form className="contact100-form validate-form">
-				<div className="wrap-input100 validate-input" data-validate="Name is required">
-					<span className="label-input100">{labels.ENTER_ORG_NAME}</span>
-					<input onChange={(e) => this.setInputValue(e)} className="input100" type="text" name="name" placeholder={labels.ENTER_ORG_NAME_PLACEHOLDER}/>
-					<span className="focus-input100"></span>
-				</div>
+      console.log('registerOrg', this.props.registerOrganisation);
 
-				<div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-					<span className="label-input100">{labels.ENTER_REGNO}</span>
-          <input onChange={(e) => this.setInputValue(e)} className="input100" type="text" name="email" placeholder={labels.ENTER_REGNO_PLACEHOLDER}/>
-          <span className="focus-input100"></span>
-				</div>
+      if (this.props.registerOrganisation.busy){
+          return (<div className="center-container full-height">Please accept or decline transaction in your web provider.</div>);
+      }else if (this.props.registerOrganisation.txid){
+          return (
+              <div className="center-container full-height">
+                  Your transaction has been submitted to the network. view it <a target="_blank" href={ "https://rinkeby.etherscan.io/tx/" + this.props.registerOrganisation.txid }>here</a>.
+              </div>);
 
-				<div className="container-contact100-form-btn">
-					<button onClick={(e) => {e.preventDefault(); this.registerOrg(); }} className="contact100-form-btn">
-						<span>
-							{labels.REGISTER_AS_ORG}
-							<i className="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-						</span>
-					</button>
-				</div>
-			</form>
-      </div>
-    );
+      }else{
+          return (
+              <div className="contact-reg center-container full-height">
+                  <form className="contact100-form validate-form">
+                      <div className="wrap-input100 validate-input" data-validate="Name is required">
+                          <span className="label-input100">{labels.ENTER_ORG_NAME}</span>
+                          <input onChange={(e) => this.setInputValue(e)} className="input100" type="text" name="name" placeholder={labels.ENTER_ORG_NAME_PLACEHOLDER}/>
+                          <span className="focus-input100"></span>
+                      </div>
+
+                      <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                          <span className="label-input100">{labels.ENTER_REGNO}</span>
+                          <input onChange={(e) => this.setInputValue(e)} className="input100" type="text" name="email" placeholder={labels.ENTER_REGNO_PLACEHOLDER}/>
+                          <span className="focus-input100"></span>
+                      </div>
+
+                      <div className="container-contact100-form-btn">
+                          <button onClick={(e) => {e.preventDefault(); this.registerOrg(); }} className="contact100-form-btn">
+						                  <span>
+							                    {labels.REGISTER_AS_ORG}
+							                    <i className="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+						                  </span>
+					                </button>
+				              </div>
+			            </form>
+              </div>
+          );
+      }
+
+
   }
 }
 
 const mapStateToProps = state => ({
-  profile:state.user.profile
+    profile:state.user.profile,
+    registerOrganisation:state.registerOrganisation
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

@@ -11,7 +11,7 @@ import LoginButtonContainer from '../../user/ui/loginbutton/LoginButtonContainer
 import LogoutButtonContainer from '../../user/ui/logoutbutton/LogoutButtonContainer'
 
 const OnlyAuthLinks =
-    <div class="full-height center-container">
+    <div className="full-height center-container">
         <Link to="/addclaim" className="btn">{ labels.ADD_PROOF_OF_SKILL }</Link>
         <Link to="/registerorg" className="btn">{ labels.REGISTER_AS_ORG }</Link>
         <Link to="/profile" className="btn">{ labels.VIEW_PROFILE }</Link>
