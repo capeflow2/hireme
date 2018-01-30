@@ -11,6 +11,7 @@ function userLoggedOut(user) {
 export function logoutUser() {
   return function(dispatch) {
     // Logout user.
+    localStorage.removeItem("credentials")
     dispatch(userLoggedOut())
 
     // Redirect home.

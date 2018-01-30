@@ -26,14 +26,14 @@ button:disabled {
     height:100%;
 }
 
-.dashboard-buttons {
+.center-container {
     flex-direction: column;
     display:flex;
     justify-content: center;
     align-items: center;
 }
 
-.dashboard-buttons > .btn {
+.center-container > .btn {
     margin-top:1em;
     width:400px;
     text-align:center;
@@ -64,4 +64,24 @@ button:disabled {
   background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none;
+}
+
+
+.logout {
+    position:absolute;
+    top:0;
+    right:0;
+    margin-right:10px;
+    margin-top:5px;
+}
+
+
+.form-label {
+
+}
+
+
+.contact-reg{
+    width:50%;
+
 }
