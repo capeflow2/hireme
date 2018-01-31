@@ -70,26 +70,16 @@ contract('Attestation', function(accounts) {
 
   it("Can add claim", async () => {
     var name = "Bachelors in Nonsense";
+    var claimantName = "TestName";
     const uportId = "123";
-    //string name, address organisation, address claimant, bool isPublic, string claimantUportId
 
-
-    await contract.addClaim(name, org, claimant, true, uportId);
+    await contract.addClaim(name,claimantName, org, claimant, true, uportId);
 
     var orgsCount = await contract.getClaimsCount.call({from:claimant});
 
     assert(orgsCount == 1);
 
     var readClaim = await contract.claims.call(0);
-
-    // string name;
-    // address organisation;
-    // bool verified;
-    // bool isPublic;
-    // address claimant;
-    // string claimantUportId;
-    // uint added;
-    console.log(readClaim);
 
     assert(readClaim[0] === name);
     assert(readClaim[1] === org);
@@ -98,7 +88,7 @@ contract('Attestation', function(accounts) {
     assert(readClaim[4] === claimant);
     assert(readClaim[5] === uportId);
     assert(readClaim[6] > 0);
-
+    assert(readClaim[7] === claimantName);
   });
 
 
@@ -113,7 +103,8 @@ contract('Attestation', function(accounts) {
   it("Cannot verify a claim if not the claims organisation", async () => {
     var name = "Claim2";
     const uportId = "123";
-    await contract.addClaim(name, org, claimant, true, uportId);
+    var claimantName = "TestName";
+    await contract.addClaim(name,claimantName, org, claimant, true, uportId);
 
     await contract.verifyClaim(0, {from: accounts[3]});
 

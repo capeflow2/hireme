@@ -71,7 +71,7 @@ export function getOrganisations(){
 }
 
 //await contract.addClaim(name, org, claimant, true, uportId);
-export function addClaim(name, orgAddress, isPublic, uportId) {
+export function addClaim(name,claimantName, orgAddress, isPublic, uportId) {
   return async function(dispatch){
     dispatch({type:ADDING_CLAIM});
     var accounts = await web3.eth.getAccounts();
@@ -79,7 +79,7 @@ export function addClaim(name, orgAddress, isPublic, uportId) {
 
     var contract = getAttestationContract();
 
-    var res = await contract.methods.addClaim(name, orgAddress, address, isPublic, uportId).send({from: accounts[0]});
+    var res = await contract.methods.addClaim(name,claimantName, orgAddress, address, isPublic, uportId).send({from: accounts[0]});
 
     console.log('res', res);
     dispatch({type:CLAIM_ADDED, value:res});

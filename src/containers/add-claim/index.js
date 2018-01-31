@@ -12,9 +12,10 @@ class AddClaim extends Component{
     super(props);
 
     this.state = {
-      uportId : props.profile ? props.profile.address : "",
-      name : "",
-      orgAddress : ""
+        uportId : props.profile ? props.profile.address : "",
+        claimantName: props.profile ? props.profile.name : "",
+        name : "",
+        orgAddress : ""
     };
 
   }
@@ -40,9 +41,6 @@ class AddClaim extends Component{
   }
 
   submit(){
-
-
-      //export function addClaim(name, orgAddress, isPublic, uportId) {
       var { uportId, name, orgAddress} = this.state;
 
       if (!orgAddress){
@@ -55,7 +53,7 @@ class AddClaim extends Component{
           return;
       }
 
-      this.props.addClaim(name, orgAddress, true, uportId);
+      this.props.addClaim(name,this.state.claimantName, orgAddress, true, uportId);
   }
 
   render(){
@@ -84,7 +82,7 @@ class AddClaim extends Component{
                   loading={true}
               />
 
-              Busy Adding Proof of skill. Please accept in your browser wallet to confirm transaction. Please be patient, this can take up till a minute after you've accepted.
+              Busy Adding Proof of skill. Please accept in your browser wallet to confirm transaction. Please be patient, this can take up to a minute after you've accepted.
           </div>);
       } else if (this.props.claims.claimAddedResult){
           return (<div className="full-height center-container">

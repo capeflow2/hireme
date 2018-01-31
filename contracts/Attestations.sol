@@ -27,10 +27,10 @@ contract Attestation {
     address claimant;
     string claimantUportId;
     uint added;
+    string claimantName;
   }
 
-  function addClaim(string name, address organisation, address claimant, bool isPublic, string claimantUportId) public returns (uint claimIndex) {
-
+  function addClaim(string name, string claimantName, address organisation, address claimant, bool isPublic, string claimantUportId) public returns (uint claimIndex) {
     Claim memory claim;
 
     claim.name = name;
@@ -40,6 +40,7 @@ contract Attestation {
     claim.claimant = claimant;
     claim.claimantUportId = claimantUportId;
     claim.added = block.timestamp;
+    claim.claimantName = claimantName;
 
     claimIndex = claims.push(claim)-1;
 

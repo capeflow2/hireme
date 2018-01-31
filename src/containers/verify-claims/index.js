@@ -72,10 +72,13 @@ class VerifyClaims extends Component {
               <div className="claimsTable">
                 <div className="claimsRow">
                   <div style={{flex:"3",width:"350px"}}>
-                      claimant Uport Id
+                      Uport Id
+                    </div>
+                  <div>
+                      Name
                     </div>
                     <div>
-                      Claim Name
+                      Skill
                     </div>
                     <div>
                       Added At
@@ -87,6 +90,7 @@ class VerifyClaims extends Component {
                 this.props.verifyClaims.unverifiedClaims.map(u =>
                                                              <div key={u.claimantUportId+u.name} className="claimsRow">
                                                                  <div style={{flex:"3",width:"350px"}}>{ u.claimantUportId }</div>
+                                                                   <div>{ u.claimantName }</div>
                                                                    <div>{ u.name }</div>
                                                                      <div>{ moment(new Date(u.added * 1000)).format("YYYY/MM/DD HH:mm") }</div>
                                                                      <div>{ !u.verifying && !u.verified ? <button onClick={(e) => {e.preventDefault(); this.verify(u.id);} }>Verify</button> : u.verified ? <span>Verified</span> : <span>
