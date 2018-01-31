@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
+import { Link } from 'react-router-dom'
 import { registerOrg } from '../../modules/register-organisation';
 
 import labels from '../../constants/labels'
