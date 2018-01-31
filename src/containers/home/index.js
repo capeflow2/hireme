@@ -10,14 +10,6 @@ import labels from '../../constants/labels'
 import LoginButtonContainer from '../../user/ui/loginbutton/LoginButtonContainer'
 import LogoutButtonContainer from '../../user/ui/logoutbutton/LogoutButtonContainer'
 
-const OnlyAuthLinks =
-    <div className="full-height center-container">
-        <Link to="/addclaim" className="btn">{ labels.ADD_PROOF_OF_SKILL }</Link>
-        <Link to="/registerorg" className="btn">{ labels.REGISTER_AS_ORG }</Link>
-        <Link to="/verifyclaims" className="btn">{ labels.VERIFY_CLAIMS }</Link>
-        <Link to="/viewskills" className="btn">View User Skills</Link>
-        <LogoutButtonContainer />
-    </div>;
 
 class Home extends Component {
 
@@ -35,6 +27,16 @@ class Home extends Component {
 
     render(){
         var {profile}= this.props;
+        const OnlyAuthLinks =
+            <div className="full-height center-container">
+                <h1>Welcome {profile ? profile.name : null}</h1>
+                <Link to="/addclaim" className="btn">{ labels.ADD_PROOF_OF_SKILL }</Link>
+                <Link to="/registerorg" className="btn">{ labels.REGISTER_AS_ORG }</Link>
+                <Link to="/verifyclaims" className="btn">{ labels.VERIFY_CLAIMS }</Link>
+                <Link to="/viewskills" className="btn">View User Skills</Link>
+                <Link to="/myprofile" className="btn">View My Profile</Link>
+                <LogoutButtonContainer />
+            </div>;
         return (
         <div className="full-height">
             {this.props.profile ? OnlyAuthLinks : null }
