@@ -10,7 +10,8 @@ const labels = {
   SELECT_ORGANISATION: "Select Org",
   ENTER_CLAIM: "Your Claim",
   ENTER_CLAIM_PLACEHOLDER: "Your Claim",
-  SUBMIT_PROOF_OF_SKILL: "Submit Proof Of Skill"
+  SUBMIT_PROOF_OF_SKILL: "Submit Proof Of Skill",
+  VERIFY_CLAIMS: "Verify Claims for my Organisation"
 }
 
 export default labels;

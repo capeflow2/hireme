@@ -38,7 +38,7 @@ contract Attestation {
     claim.verified = false;//make sure it's false
     claim.isPublic = isPublic;
     claim.claimant = claimant;
-    claim.claimantUportId;
+    claim.claimantUportId = claimantUportId;
     claim.added = block.timestamp;
 
     claimIndex = claims.push(claim)-1;

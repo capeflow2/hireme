@@ -40,8 +40,6 @@ class RegisterOrg extends Component {
   }
 
   render(){
-      console.log('registerOrg', this.props.registerOrganisation);
-
       if (this.props.registerOrganisation.busy){
           return (<div className="center-container full-height">Please accept or decline transaction in your web provider.</div>);
       }else if (this.props.registerOrganisation.txid){

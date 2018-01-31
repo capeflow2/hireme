@@ -14,6 +14,7 @@ const OnlyAuthLinks =
     <div className="full-height center-container">
         <Link to="/addclaim" className="btn">{ labels.ADD_PROOF_OF_SKILL }</Link>
         <Link to="/registerorg" className="btn">{ labels.REGISTER_AS_ORG }</Link>
+        <Link to="/verifyclaims" className="btn">{ labels.VERIFY_CLAIMS }</Link>
         <Link to="/profile" className="btn">{ labels.VIEW_PROFILE }</Link>
         <LogoutButtonContainer />
     </div>;

@@ -53,7 +53,7 @@ export const registerOrg = (uportId, name, registrationNumber) => {
   return async dispatch => {
     var accounts = new Accounts(web3);
 
-    //var contract = new web3.eth.Contract(attestationContract.abi, "0x12334cFF2F19cc1a86FDfb7c1516242dF75ecE9e");
+    var contract = new web3.eth.Contract(attestationContract.abi, "0x12334cFF2F19cc1a86FDfb7c1516242dF75ecE9e");
 
     var contract = getAttestationContract();
 
