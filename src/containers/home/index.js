@@ -10,9 +10,7 @@ import labels from '../../constants/labels'
 import LoginButtonContainer from '../../user/ui/loginbutton/LoginButtonContainer'
 import LogoutButtonContainer from '../../user/ui/logoutbutton/LogoutButtonContainer'
 
-
 class Home extends Component {
-
     componentWillMount(){
         if (!this.props.profile){
             this.props.loginUser();

@@ -11,7 +11,7 @@ const initialState = { loading: false, claims: []};
 const viewSkills = (state = initialState, action) => {
   switch (action.type){
   case GETTING_USER_CLAIMS:{
-    return {...state, busy:true};
+    return {...state, loading:true, claims: []};
   }
   case SET_USER_CLAIMS:{
     return {...state, loading:false, claims: action.value};
@@ -24,7 +24,7 @@ const viewSkills = (state = initialState, action) => {
 
 export default viewSkills;
 
-export function getClaimsForUser(userAddress){
+export function getClaimsForUser(searchField){
   return async function(dispatch) {
     dispatch({type: GETTING_USER_CLAIMS});
 
@@ -40,7 +40,7 @@ export function getClaimsForUser(userAddress){
 
     for (var i = 0; i < count; i++){
       var claim = await contract.methods.claims(i).call();
-      if (claim.claimant === userAddress){
+      if (claim.claimant === searchField || claim.claimantName === searchField || claim.claimantUportId === searchField){
         claims.push({...claim, id: i});
       }
     }

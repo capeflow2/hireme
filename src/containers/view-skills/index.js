@@ -46,7 +46,14 @@ class ViewSkills extends Component {
 
   render(){
       if (this.props.viewSkills.loading){
-          return (<div className="center-container full-height">Please wait while we retrieve your outstanding claims</div>);
+        return (<div className="center-container full-height">
+
+                           <RingLoader
+                           color={'#000000'}
+                           loading={this.props.viewSkills.loading}
+                           />
+
+                Please wait while we retrieve your outstanding claims</div>);
       }
     // else if (!this.props.viewClaims.claims){
     //   return (<div className="full-height center-container">
@@ -61,7 +68,7 @@ class ViewSkills extends Component {
           return (
             <div className="claims-container full-height">
               <div style={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"center"}}>
-                <label style={{marginTop:"5px"}}>User Address: </label>
+                <label style={{marginTop:"5px"}}>User Address / Name:</label>
                 <input style={{border:"1px solid #b2b2b2", margin:"5px", width:"400px"}} name="userAddress" type="text" onChange={(e) => this.setInputValue(e)}></input>
                 <button onClick={(e) => this.getUserClaims()}>Get User Claims</button>
               </div>
@@ -72,7 +79,7 @@ class ViewSkills extends Component {
               <div className="claimsTable">
                 <div className="claimsRow">
                   <div style={{flex:"3",width:"350px"}}>
-                      claimant Uport Id
+                      Claimant Uport Id
                     </div>
                     <div>
                       Claim Name
