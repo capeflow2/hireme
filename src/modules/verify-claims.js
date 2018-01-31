@@ -5,10 +5,11 @@ import {getAttestationContract} from '../util/web3.js';
 
 const VERIFY_CLAIM = "VERIFY_CLAIM";
 const VERIFY_CLAIM_INITIATED = "VERIFY_CLAIM_INITIATED";
+const VERIFY_CLAIM_COMPLETED = "VERIFY_CLAIM_COMPLETED";
 const GETTING_UNVERIFIED_CLAIMS = "GETTING_UNVERIFIED_CLAIMS";
 const SET_UNVERIFIED_CLAIMS = "SET_UNVERIFIED_CLAIMS";
 
-const initialState = { busy: true, unverifiedClaims: [] };
+const initialState = { busy: true, verifying:true, unverifiedClaims: [], verifyClaimResult: null };
 
 const verifyClaims = (state = initialState, action) => {
   switch (action.type){
@@ -16,7 +17,18 @@ const verifyClaims = (state = initialState, action) => {
     return {...state, busy:true};
   }
   case SET_UNVERIFIED_CLAIMS:{
-    return {...state, busy:false, unverifiedClaims:action.value};
+    return {...state, busy:false, unverifiedClaims: action.value};
+  }
+  case VERIFY_CLAIM_INITIATED:{
+    var claim = state.unverifiedClaims.find(c => c.id == action.value);
+
+    claim.verifying = true;
+
+    return {...state, verifying:true, unverifiedClaims: action.value};
+  }
+  case VERIFY_CLAIM_COMPLETED:{
+    var changedUnverifiedClaims =  state.unverifiedClaims.filter(c => c.id != action.value);
+    return {...state, verifying:false, unverifiedClaims: changedUnverifiedClaims};
   }
   default:{
     return state;
@@ -32,7 +44,6 @@ export function getUnverifiedClaims(){
 
     var contract = getAttestationContract();
     var accounts = await getAccounts();
-    console.log("accounts = ", accounts);
 
     var orgAddress = accounts[0];
 
@@ -42,13 +53,10 @@ export function getUnverifiedClaims(){
 
     for (var i = 0; i < count; i++){
       var claim = await contract.methods.claims(i).call();
-      console.log(claim);
       if (claim.organisation === accounts[0] && !claim.verified){
-        claims.push({...claim, id: i});
+        claims.push({...claim, id: i, verifying:false});
       }
     }
-
-    console.log('claims', claims);
 
     dispatch({type: SET_UNVERIFIED_CLAIMS, value: claims});
   }
@@ -62,8 +70,22 @@ export function verifyClaim(id) {
 
     var contract = getAttestationContract();
 
-    var claimId = await contract.methods.verifyClaim(id).send({from: accounts[0]});
-  }
+    contract.methods.verifyClaim(id).send({from: accounts[0]})
+      .on('transactionHash', function(transactionHash){
+        dispatch({type: VERIFY_CLAIM_COMPLETED, value: transactionHash, id: id});
+        })
+      .on('receipt', function(receipt){
+        console.log(receipt);
+      })
+      .on('confirmation', function(confirmationNumber, receipt){
+        console.log('confirmed', receipt);
+      })
+      .then(function(newContractInstance){
+        console.log(newContractInstance.options.address) // instance with the new contract address
+      });
+
+
+  };
 }
 
 // export function attest(uportId, credentialName, credentialValue) {

@@ -100,5 +100,27 @@ contract('Attestation', function(accounts) {
     assert(readClaim[6] > 0);
 
   });
+
+
+  it("Can verify a claim", async () => {
+    await contract.verifyClaim(0, {from: org});
+    var readClaim = await contract.claims.call(0);
+    console.log("readClaim = ", readClaim);
+    assert(readClaim[2] === true);
+
+  });
+
+  it("Cannot verify a claim if not the claims organisation", async () => {
+    var name = "Claim2";
+    const uportId = "123";
+    await contract.addClaim(name, org, claimant, true, uportId);
+
+    await contract.verifyClaim(0, {from: accounts[3]});
+
+    var readClaim = await contract.claims.call(1);
+    console.log("readClaim = ", readClaim);
+    assert(readClaim[2] === false);
+
+  });
 });
 

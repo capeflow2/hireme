@@ -68,14 +68,29 @@ class AddClaim extends Component{
               state: { from: this.props.location }
           }}/>);
       }
-      else if (this.props.claims.busy || !this.props.claims.organisations){
+      else if (this.props.claims.loading || !this.props.claims.organisations){
           return (<div className="full-height center-container">
               <RingLoader
                   color={'#000000'}
-                  loading={this.props.claims.busy}
+                  loading={this.props.claims.loading}
               />
 
               Please wait while we are retrieving the organisations.
+          </div>);
+
+      } else if (this.props.claims.addingClaim){
+          return (<div className="full-height center-container">
+              <RingLoader
+                  color={'#000000'}
+                  loading={true}
+              />
+
+              Busy Adding Proof of skill. Please accept in your browser wallet to confirm transaction. Please be patient, this can take up till a minute after you've accepted.
+          </div>);
+      } else if (this.props.claims.claimAddedResult){
+          return (<div className="full-height center-container">
+
+              Claim Added. Please see <a target="_blank" href={ "https://rinkeby.etherscan.io/tx/" + this.props.claims.claimAddedResult.transactionHash }>here</a> for transaction.
           </div>);
       }else if (this.props.claims.organisations){
           return (

@@ -1,8 +1,13 @@
 const initialState = {
-  profile: null
+  profile: null,
+  orgUser: false,
+  normalUser: false
 }
 
 const user = (state = initialState, action) => {
+  if (action.type === "SET_USER_AS_ORG"){
+    return {...state, orgUser: true};
+  }
   if (action.type === 'USER_LOGGED_IN')
   {
     return Object.assign({}, state, {

@@ -71,6 +71,15 @@ contract Attestation {
 
   }
 
+  function verifyClaim(uint claimIndex) public {
+
+    Claim claim = claims[claimIndex];
+
+    require(msg.sender == claim.organisation);
+
+    claim.verified = true;
+  }
+
   //make this protected by either the claimant or public or organisation
 
   /* function getClaims(address claimant) returns (uint[10]){ */

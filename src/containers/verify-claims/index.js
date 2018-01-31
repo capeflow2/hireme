@@ -44,10 +44,8 @@ class VerifyClaims extends Component {
   }
 
   render(){
-    console.log('props', this.props.verifyClaims);
-
       if (this.props.verifyClaims.busy){
-          return (<div className="center-container full-height">Please wait while we tretrieve your outstanding claims</div>);
+          return (<div className="center-container full-height">Please wait while we retrieve your outstanding claims</div>);
       }
     else if (!this.props.verifyClaims.unverifiedClaims){
       return (<div className="full-height center-container">
@@ -64,7 +62,7 @@ class VerifyClaims extends Component {
             <div className="claims-container full-height">
               <div className="claimsTable">
                 <div className="claimsRow">
-                    <div>
+                  <div style={{flex:"3",width:"350px"}}>
                       claimant Uport Id
                     </div>
                     <div>
@@ -74,16 +72,16 @@ class VerifyClaims extends Component {
                       Added At
                     </div>
                     <div>
-                      Verify
+                      
                     </div>
                     </div>
               {
                 this.props.verifyClaims.unverifiedClaims.map(u =>
-                                                             <div className="claimsRow">
-                                                                 <div>{ u.claimantUportId }</div>
+                                                             <div key={u.claimantUportId+u.name} className="claimsRow">
+                                                                 <div style={{flex:"3",width:"350px"}}>{ u.claimantUportId }</div>
                                                                    <div>{ u.name }</div>
                                                                      <div>{ moment(new Date(u.added * 1000)).format("YYYY/MM/DD HH:mm") }</div>
-                                                                       <div><button onClick={(e) => {e.preventDefault(); this.verify(u.id);} }>Verify</button></div>
+                                                                       <div>{ !u.verifying ? <button onClick={(e) => {e.preventDefault(); this.verify(u.id);} }>Verify</button> : null }</div>
                                                                </div>
                                                             )
               }
@@ -102,7 +100,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  //verifyClaim,
+  verifyClaim,
   getUnverifiedClaims
 }, dispatch);
 
