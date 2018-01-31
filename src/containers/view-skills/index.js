@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { RingLoader } from 'react-spinners';
+import {Link} from 'react-router-dom'
 import moment from 'moment';
-
 import { getClaimsForUser } from '../../modules/view-skills';
 
 import labels from '../../constants/labels'
@@ -67,6 +67,7 @@ class ViewSkills extends Component {
     else{
           return (
             <div className="claims-container full-height">
+             { <button style={{position:"absolute", left:"0", top: "15px"}}><Link to="/">Back</Link></button> }
               <div style={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"center"}}>
                 <label style={{marginTop:"5px"}}>User Address / Name:</label>
                 <input style={{border:"1px solid #b2b2b2", margin:"5px", width:"400px"}} name="userAddress" type="text" onChange={(e) => this.setInputValue(e)}></input>

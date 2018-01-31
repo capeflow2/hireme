@@ -51,6 +51,7 @@ class RegisterOrg extends Component {
       }else{
           return (
               <div className="contact-reg center-container full-height">
+               { <button style={{position:"absolute", left:"0", top: "15px"}}><Link to="/">Back</Link></button> }
                   <form className="contact100-form validate-form">
                       <div className="wrap-input100 validate-input" data-validate="Name is required">
                           <span className="label-input100">{labels.ENTER_ORG_NAME}</span>
