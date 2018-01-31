@@ -45,7 +45,7 @@ class RegisterOrg extends Component {
       }else if (this.props.registerOrganisation.txid){
           return (
               <div className="center-container full-height">
-                  Your transaction has been submitted to the network. view it <a target="_blank" href={ "https://rinkeby.etherscan.io/tx/" + this.props.registerOrganisation.txid }>here</a>.
+                  Your transaction has been submitted to the network. View it <a target="_blank" href={ "https://rinkeby.etherscan.io/tx/" + this.props.registerOrganisation.txid }>here.</a>
               </div>);
 
       }else{

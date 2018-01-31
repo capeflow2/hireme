@@ -83,7 +83,7 @@ class AddClaim extends Component{
                   loading={true}
               />
 
-              Busy Adding Proof of skill. Please accept in your browser wallet to confirm transaction. Please be patient, this can take up to a minute after you've accepted.
+              Busy Adding Qualification. Please accept in your browser wallet to confirm transaction. Please be patient, this can take up to a minute after you've accepted.
           </div>);
       } else if (this.props.claims.claimAddedResult){
           return (<div className="full-height center-container">
