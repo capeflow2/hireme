@@ -56,7 +56,9 @@ export function getOrganisations(){
       try{
         var org = await contract.methods.orgs(i).call({from: accounts[0]});
         if (org.name && org.owner){
-          organisations.push({name:org.name, orgAddress:org.owner, uportId: org.uportId, registrationNumber: org.registrationNumber});
+          if (!organisations.find(o => o.name == org.name)){ // removing duplicates, should be done on insert instead
+            organisations.push({name:org.name, orgAddress:org.owner, uportId: org.uportId, registrationNumber: org.registrationNumber});
+          }
         }
       }catch(e){
         console.log(e);
@@ -76,9 +78,12 @@ export function addClaim(name,claimantName, orgAddress, isPublic, uportId) {
 
     var contract = getAttestationContract();
 
-    var res = await contract.methods.addClaim(name,claimantName, orgAddress, address, isPublic, uportId).send({from: accounts[0]});
-
-    console.log('res', res);
-    dispatch({type:CLAIM_ADDED, value:res});
+    var res = await contract.methods.addClaim(name,claimantName, orgAddress, address, isPublic, uportId).send({from: accounts[0]})
+      .on('transactionHash', function(transactionHash){
+        dispatch({type:CLAIM_ADDED, value:res});
+      })
+      .then(function(newContractInstance){
+        console.log(newContractInstance.options.address) // instance with the new contract address
+      });
   }
 }

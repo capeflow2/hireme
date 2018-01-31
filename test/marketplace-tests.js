@@ -48,5 +48,13 @@ contract('Marketplace', function(accounts) {
 
     assert(jobOffer[8] == requestor);
   });
+
+  it("Can Accept Job if right amount is sent", async () => {
+
+    await contract.acceptJob(0, {from: provider, value: web3.toWei(1,'ether').toString()});
+
+    var jobOffer = await contract.jobs.call(0, {from: requestor});
+    assert(jobOffer[5] == "Accepted");
+  });
 });
 

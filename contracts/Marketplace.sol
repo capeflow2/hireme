@@ -9,6 +9,8 @@ contract Marketplace {
   //mapping (uint => uint) jobRequestCount;
 
   event JobAdded(uint indexed id, string title);
+  event JobAccepted(uint indexed id);
+  event JobFinished(uint indexed id);
 
   struct JobRequest {
     address requestorAddress;
@@ -55,35 +57,28 @@ contract Marketplace {
     job.request = msg.sender;
     job.status = "Pending Accept";
 
-    //address[] addresses = job.requests;
-    //addresses.push(msg.sender);
-
-    //job.requests = addresses;
-
-
-
-    //null check plz
-    //var currentCount = jobRequestCount[jobId];
-
-    /* JobRequest memory jobRequest; */
-
-    /* JobRequest[] storage j = JobRequest[](0); */
-
-    /* jobRequest.requestorAddress = msg.sender; */
-    /* jobRequest.requestorName = requestorName; */
-    /* jobRequest.requestorUportId = requestorUportId; */
-    /* jobRequests[jobId] = j; */
-
-    // .push(jobRequest);// = jobRequest;
   }
 
+  function acceptJob(uint jobId) public payable {
+    JobOffer job = jobs[jobId];
 
-  /* function getRequestsForJob(uint jobId) public returns (JobRequest) { */
-  /*   JobRequest memory jobRequest; */
-  /*   jobRequest = jobRequests[jobId]; */
-  /*   return jobRequest; */
-  /* } */
+    require(msg.value == job.paymentAmountInWei);
+    require(job.request != 0x0000000000000000000000000000000000000000);
 
+    job.request = msg.sender;
+    job.status = "Accepted";
+    JobAccepted(jobId);
+  }
+
+  function finishJob(uint jobId){
+    JobOffer job = jobs[jobId];
+
+    //require(StringUtils.equal(job.status,"Accepted"));
+    require(job.request != 0x0000000000000000000000000000000000000000);
+
+    job.request.transfer(job.paymentAmountInWei);
+    JobFinished(jobId);
+  }
 
   function Marketplace() public {
     owner = msg.sender;

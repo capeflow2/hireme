@@ -23,7 +23,9 @@ export const getAttestationContract = () => {
 }
 
 export const getMarketplaceContract = () => {
-  var address = "0x456dda64fa1621122fba26177ba0bf4629a51c11";
+  //var address = "0x456dda64fa1621122fba26177ba0bf4629a51c11";
+
+  var address = "0x81616acbdfcadedf33221a6b7437610c9fefdad6";
 
   var contract = new web3.eth.Contract(marketplaceContract.abi, address);
 

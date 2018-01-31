@@ -13,10 +13,16 @@ class ViewSkills extends Component {
 
   constructor(props){
     super(props)
+      var search = props.location && props.location.search ? props.location.search.split("=")[1] : ""
     this.state = {
       uportId: props.profile ? props.profile.address : "",
-      userAddress: ""
+        userAddress: search,
+        showSearch: search ? false : true
     };
+
+      if (this.state.userAddress){
+          this.getUserClaims();
+          }
   }
 
   componentWillMount(){
@@ -39,8 +45,6 @@ class ViewSkills extends Component {
   }
 
   getUserClaims(){
-    console.log('userAddress', this.state.userAddress);
-
     this.props.getClaimsForUser(this.state.userAddress);
   }
 
@@ -56,13 +60,17 @@ class ViewSkills extends Component {
                 Please wait while we retrieve your outstanding claims</div>);
       }
     else{
-          return (
-            <div className="claims-container full-height">
-              <div style={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"center"}}>
+
+        const search = <div style={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"center"}}>
                 <label style={{marginTop:"5px"}}>User Address / Name:</label>
                 <input style={{border:"1px solid #b2b2b2", margin:"5px", width:"400px"}} name="userAddress" type="text" onChange={(e) => this.setInputValue(e)}></input>
                 <button onClick={(e) => this.getUserClaims()}>Get User Claims</button>
-              </div>
+              </div>;
+
+
+          return (
+            <div className="claims-container full-height">
+                {this.state.showSearch ? search : null}
               <br/>
               <br/>
               <br/>
@@ -72,11 +80,14 @@ class ViewSkills extends Component {
                   <div style={{flex:"3",width:"350px"}}>
                       Claimant Uport Id
                     </div>
-                    <div>
-                      Claim Name
+                  <div >
+                      Claimant Name
                     </div>
                     <div>
-                      Added At
+                      Skill
+                    </div>
+                    <div>
+                      Created At
                     </div>
                     <div>
                       Is Verified
@@ -86,9 +97,10 @@ class ViewSkills extends Component {
                 this.props.viewSkills.claims.map(u =>
                                                              <div key={u.claimantUportId+u.name} className="claimsRow">
                                                                  <div style={{flex:"3",width:"350px"}}>{ u.claimantUportId }</div>
+                                                                   <div>{ u.claimantName}</div>
                                                                    <div>{ u.name }</div>
                                                                      <div>{ moment(new Date(u.added * 1000)).format("YYYY/MM/DD HH:mm") }</div>
-                                                                       <div>{ u.verified }</div>
+                                                                       <div>{ u.verified ? "True" : "False" }</div>
                                                                </div>
                                                             )
               }

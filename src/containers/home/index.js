@@ -26,15 +26,26 @@ class Home extends Component {
     render(){
         var {profile}= this.props;
         const OnlyAuthLinks =
+
+            <div className="center-container" style={{}}>
             <div className="full-height center-container">
-                <h1>Welcome {profile ? profile.name : null}</h1>
-                <Link to="/addclaim" className="btn">{ labels.ADD_PROOF_OF_SKILL }</Link>
+            <h1>Welcome {profile ? profile.name : null}</h1>
+                <h4>Organisation</h4>
                 <Link to="/registerorg" className="btn">{ labels.REGISTER_AS_ORG }</Link>
                 <Link to="/verifyclaims" className="btn">{ labels.VERIFY_CLAIMS }</Link>
                 <Link to="/viewskills" className="btn">View User Skills</Link>
                 <Link to="/addjob" className="btn">Post / Accept Jobs</Link>
                 <LogoutButtonContainer />
+
             </div>;
+            <div className="full-height center-container">
+                <h4>Individual</h4>
+                <Link to="/addclaim" className="btn">{ labels.ADD_PROOF_OF_SKILL }</Link>
+                <Link to="/viewjobs" className="btn">View Open Jobs</Link>
+                <LogoutButtonContainer />
+
+            </div>
+            </div>
         return (
         <div className="full-height">
             {this.props.profile ? OnlyAuthLinks : null }
