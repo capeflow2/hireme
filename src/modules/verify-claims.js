@@ -9,7 +9,7 @@ const VERIFY_CLAIM_COMPLETED = "VERIFY_CLAIM_COMPLETED";
 const GETTING_UNVERIFIED_CLAIMS = "GETTING_UNVERIFIED_CLAIMS";
 const SET_UNVERIFIED_CLAIMS = "SET_UNVERIFIED_CLAIMS";
 
-const initialState = { busy: true, verifying:true, unverifiedClaims: [], verifyClaimResult: null };
+const initialState = { busy: true, verifying:false, unverifiedClaims: [], verifyClaimResult: null };
 
 const verifyClaims = (state = initialState, action) => {
   switch (action.type){
@@ -24,7 +24,7 @@ const verifyClaims = (state = initialState, action) => {
 
     claim.verifying = true;
 
-    return {...state, verifying:true, unverifiedClaims: action.value};
+    return {...state, verifying:true};
   }
   case VERIFY_CLAIM_COMPLETED:{
     var changedUnverifiedClaims =  state.unverifiedClaims.filter(c => c.id != action.value);
@@ -65,6 +65,8 @@ export function getUnverifiedClaims(){
 //await contract.addClaim(name, org, claimant, true, uportId);
 export function verifyClaim(id) {
   return async function(dispatch){
+    console.log('verifying claim');
+    dispatch({type: VERIFY_CLAIM_INITIATED, value: id});
     var accounts = await web3.eth.getAccounts();
     var address = accounts[0];
 

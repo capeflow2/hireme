@@ -55,7 +55,6 @@ class AddClaim extends Component{
           return;
       }
 
-      debugger;
       this.props.addClaim(name, orgAddress, true, uportId);
   }
 

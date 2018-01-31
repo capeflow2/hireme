@@ -36,7 +36,6 @@ class RegisterOrg extends Component {
   }
 
   registerOrg(){
-      debugger;
     this.props.registerOrg(this.state.uportId, this.state.name, this.state.regNumber);
   }
 

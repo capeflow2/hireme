@@ -13,10 +13,9 @@ if (typeof window.web3 !== 'undefined') {
 
 export const getAttestationContract = () => {
   var oldAddress = "0x12334cFF2F19cc1a86FDfb7c1516242dF75ecE9e";
+  //var address = "0x970c58ba13d727c59d914f17cf997bd8ee85a7cf";
 
-
-  var address = "0x970c58ba13d727c59d914f17cf997bd8ee85a7cf";
-  //var address = "0x0fd4701d115bf16fa042417f6dc5b9b6d3a32721";
+  var address = "0xba930bb471be501ee0ce7dc48edc2ea851b00ddd";
 
   var contract = new web3.eth.Contract(attestationContract.abi, address);
 

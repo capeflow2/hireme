@@ -72,10 +72,10 @@ contract Attestation {
   }
 
   function verifyClaim(uint claimIndex) public {
-
     Claim claim = claims[claimIndex];
 
     require(msg.sender == claim.organisation);
+    require(claim.verified == false);
 
     claim.verified = true;
   }

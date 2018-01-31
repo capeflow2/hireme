@@ -56,6 +56,15 @@ class VerifyClaims extends Component {
               Please wait while we are retrieving your unverified claims.
               </div>);
     }
+    else if (this.props.verifyClaims.verifying){
+      return (<div className="full-height center-container">
+              <RingLoader
+              color={'#000000'}
+              loading={this.props.verifyClaims.verifying}
+              />
+              Please approve the verify transaction in your wallet.
+              </div>);
+    }
 
     else{
           return (
@@ -72,7 +81,6 @@ class VerifyClaims extends Component {
                       Added At
                     </div>
                     <div>
-                      
                     </div>
                     </div>
               {
@@ -81,7 +89,14 @@ class VerifyClaims extends Component {
                                                                  <div style={{flex:"3",width:"350px"}}>{ u.claimantUportId }</div>
                                                                    <div>{ u.name }</div>
                                                                      <div>{ moment(new Date(u.added * 1000)).format("YYYY/MM/DD HH:mm") }</div>
-                                                                       <div>{ !u.verifying ? <button onClick={(e) => {e.preventDefault(); this.verify(u.id);} }>Verify</button> : null }</div>
+                                                                       <div>{ !u.verifying ? <button onClick={(e) => {e.preventDefault(); this.verify(u.id);} }>Verify</button> : <span>
+
+                                                                              <RingLoader
+                                                                                   color={'#000000'}
+                                                                                   loading={u.verifying}
+                                                                                   size="50"
+                                                                                   />
+                                                                              </span> }</div>
                                                                </div>
                                                             )
               }

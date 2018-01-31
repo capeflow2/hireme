@@ -8,8 +8,8 @@ const labels = {
   ENTER_REGNO_PLACEHOLDER: "Enter Registration Address",
   ENTER_REGNO: "RegNo",
   SELECT_ORGANISATION: "Select Org",
-  ENTER_CLAIM: "Your Claim",
-  ENTER_CLAIM_PLACEHOLDER: "Your Claim",
+  ENTER_CLAIM: "Your Skill",
+  ENTER_CLAIM_PLACEHOLDER: "Your Skill",
   SUBMIT_PROOF_OF_SKILL: "Submit Proof Of Skill",
   VERIFY_CLAIMS: "Verify Claims for my Organisation"
 }
