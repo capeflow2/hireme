@@ -53,12 +53,12 @@ export function getUnverifiedClaims(){
 
     for (var i = 0; i < count; i++){
       var claim = await contract.methods.claims(i).call();
-      if (claim.organisation === accounts[0] && !claim.verified){
+      if (claim.organisation === accounts[0] ){
         claims.push({...claim, id: i, verifying:false});
       }
     }
 
-    dispatch({type: SET_UNVERIFIED_CLAIMS, value: claims});
+    dispatch({type: SET_UNVERIFIED_CLAIMS, value: claims.reverse()});
   }
 }
 

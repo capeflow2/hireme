@@ -3,7 +3,7 @@ import attestationContract from '../abis/Attestation.json';
 import Web3 from 'web3';
 import Accounts from 'web3-eth-accounts';
 
-import {getAttestationContract} from '../util/web3.js';
+import { getAttestationContract } from '../util/web3.js';
 
 const ADD_ORG_ERROR = "ADD_ORG_ERROR";
 const ADD_ORG_INITIATED = "ADD_ORG_INITIATED";
@@ -32,7 +32,6 @@ const registerOrganisation = (state = initialState, action) => {
 }
 
 export default registerOrganisation;
-
 
 var web3;// = new Web3();
 
@@ -67,6 +66,7 @@ export const registerOrg = (uportId, name, registrationNumber) => {
           return;
         }
         dispatch({type: ADD_ORG_COMPLETED, value: res});
+        dispatch({type: "SET_USER_AS_ORG"});
       });
 
     });

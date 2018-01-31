@@ -4,23 +4,22 @@ import { connect } from 'react-redux'
 import { RingLoader } from 'react-spinners';
 import moment from 'moment';
 
-import { verifyClaim, getUnverifiedClaims } from '../../modules/verify-claims';
+import { getClaimsForUser } from '../../modules/view-skills';
 
 import labels from '../../constants/labels'
-import './styles.css'
+//import './styles.css'
 
-class VerifyClaims extends Component {
+class ViewSkills extends Component {
 
   constructor(props){
     super(props)
     this.state = {
       uportId: props.profile ? props.profile.address : "",
+      userAddress: ""
     };
   }
 
-
   componentWillMount(){
-    this.props.getUnverifiedClaims();
   }
 
   setInputValue(event){
@@ -39,36 +38,37 @@ class VerifyClaims extends Component {
     this.setState(newState);
   }
 
-  verify(id){
-    this.props.verifyClaim(id);
+  getUserClaims(){
+    console.log('userAddress', this.state.userAddress);
+
+    this.props.getClaimsForUser(this.state.userAddress);
   }
 
   render(){
-      if (this.props.verifyClaims.busy){
+      if (this.props.viewSkills.loading){
           return (<div className="center-container full-height">Please wait while we retrieve your outstanding claims</div>);
       }
-    else if (!this.props.verifyClaims.unverifiedClaims){
-      return (<div className="full-height center-container">
-              <RingLoader
-              color={'#000000'}
-              loading={this.props.verifyClaims.busy}
-              />
-              Please wait while we are retrieving your unverified claims.
-              </div>);
-    }
-    else if (this.props.verifyClaims.verifying){
-      return (<div className="full-height center-container">
-              <RingLoader
-              color={'#000000'}
-              loading={this.props.verifyClaims.verifying}
-              />
-              Please approve the verify transaction in your wallet.
-              </div>);
-    }
-
+    // else if (!this.props.viewClaims.claims){
+    //   return (<div className="full-height center-container">
+    //           <RingLoader
+    //           color={'#000000'}
+    //           loading={this.props.verifyClaims.busy}
+    //           />
+    //           Please wait while we are retrieving your unverified claims.
+    //           </div>);
+    // }
     else{
           return (
             <div className="claims-container full-height">
+              <div style={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"center"}}>
+                <label style={{marginTop:"5px"}}>User Address: </label>
+                <input style={{border:"1px solid #b2b2b2", margin:"5px", width:"400px"}} name="userAddress" type="text" onChange={(e) => this.setInputValue(e)}></input>
+                <button onClick={(e) => this.getUserClaims()}>Get User Claims</button>
+              </div>
+              <br/>
+              <br/>
+              <br/>
+
               <div className="claimsTable">
                 <div className="claimsRow">
                   <div style={{flex:"3",width:"350px"}}>
@@ -81,22 +81,16 @@ class VerifyClaims extends Component {
                       Added At
                     </div>
                     <div>
+                      Is Verified
                     </div>
                     </div>
               {
-                this.props.verifyClaims.unverifiedClaims.map(u =>
+                this.props.viewSkills.claims.map(u =>
                                                              <div key={u.claimantUportId+u.name} className="claimsRow">
                                                                  <div style={{flex:"3",width:"350px"}}>{ u.claimantUportId }</div>
                                                                    <div>{ u.name }</div>
                                                                      <div>{ moment(new Date(u.added * 1000)).format("YYYY/MM/DD HH:mm") }</div>
-                                                                     <div>{ !u.verifying && !u.verified ? <button onClick={(e) => {e.preventDefault(); this.verify(u.id);} }>Verify</button> : u.verified ? <span>Verified</span> : <span>
-
-                                                                              <RingLoader
-                                                                                   color={'#000000'}
-                                                                                   loading={u.verifying}
-                                                                                   size="50"
-                                                                                   />
-                                                                              </span> }</div>
+                                                                       <div>{ u.verified }</div>
                                                                </div>
                                                             )
               }
@@ -104,22 +98,19 @@ class VerifyClaims extends Component {
               </div>
           );
       }
-
-
   }
 }
 
 const mapStateToProps = state => ({
   profile:state.user.profile,
-  verifyClaims: state.verifyClaims
+  viewSkills: state.viewSkills
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  verifyClaim,
-  getUnverifiedClaims
+  getClaimsForUser
 }, dispatch);
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(VerifyClaims);
+)(ViewSkills);
