@@ -93,7 +93,7 @@ class AddClaim extends Component{
           return (
               <div className="full-height center-container">
                   <form className="contact100-form validate-form">
-                      <div className="wrap-input100 validate-input" data-validate="Name is required">
+                      <div className="wrap-input100 validate-input">
                           <span className="label-input100">{labels.SELECT_ORGANISATION}</span>
                           <select name="orgAddress" onChange={(e) => this.setInputValue(e)} value={this.state.orgAddress}>
                               <option value="">Please select </option>
@@ -116,18 +116,6 @@ class AddClaim extends Component{
 					                </button>
 				              </div>
 			            </form>
-
-                  {/* <h3>Attest a user</h3>
-                      <label>Uport Id</label>
-                      <input value={this.state.uportId} type="text" name="uportId" onChange={(e) => this.setInputValue(e)} />
-
-                      <label>Credential Name</label>
-                      <input value={this.state.credentialName} type="text" name="credentialName" onChange={(e) => this.setInputValue(e)} />
-
-                      <label>Credential Value</label>
-                      <input value={ this.state.credentialValue } type="text" name="credentialValue" id="credentialValue"  onChange={(e) => this.setInputValue(e)}/>
-
-                      <button onClick={(e) => this.submitAttestation(e)}>Attest</button> */}
               </div>
           );
           

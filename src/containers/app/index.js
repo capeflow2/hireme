@@ -6,6 +6,7 @@ import AddClaim from '../add-claim'
 import RegisterOrg from '../register-org'
 import VerifyClaims from '../verify-claims'
 import ViewSkills from '../view-skills'
+import AddJob from '../add-job'
 import LoginButtonContainer from '../../user/ui/loginbutton/LoginButtonContainer'
 import LogoutButtonContainer from '../../user/ui/logoutbutton/LogoutButtonContainer'
 
@@ -21,6 +22,7 @@ const App = (props) => (
       <Route exact path="/registerorg" component={RegisterOrg} />
       <Route exact path="/verifyclaims" component={VerifyClaims} />
       <Route exact path="/viewskills" component={ViewSkills} />
+      <Route exact path="/addjob" component={AddJob} />
     </div>
 )
 

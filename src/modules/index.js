@@ -5,6 +5,7 @@ import registerOrganisation from './register-organisation'
 import claims from './claims'
 import verifyClaims from './verify-claims'
 import viewSkills from './view-skills'
+import jobOffers from './job-offers'
 
 export default combineReducers({
   router: routerReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   registerOrganisation,
   claims,
   verifyClaims,
-  viewSkills
+  viewSkills,
+  jobOffers
 })

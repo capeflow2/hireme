@@ -55,15 +55,6 @@ class ViewSkills extends Component {
 
                 Please wait while we retrieve your outstanding claims</div>);
       }
-    // else if (!this.props.viewClaims.claims){
-    //   return (<div className="full-height center-container">
-    //           <RingLoader
-    //           color={'#000000'}
-    //           loading={this.props.verifyClaims.busy}
-    //           />
-    //           Please wait while we are retrieving your unverified claims.
-    //           </div>);
-    // }
     else{
           return (
             <div className="claims-container full-height">

@@ -95,7 +95,6 @@ contract('Attestation', function(accounts) {
   it("Can verify a claim", async () => {
     await contract.verifyClaim(0, {from: org});
     var readClaim = await contract.claims.call(0);
-    console.log("readClaim = ", readClaim);
     assert(readClaim[2] === true);
 
   });
@@ -109,7 +108,6 @@ contract('Attestation', function(accounts) {
     await contract.verifyClaim(0, {from: accounts[3]});
 
     var readClaim = await contract.claims.call(1);
-    console.log("readClaim = ", readClaim);
     assert(readClaim[2] === false);
 
   });

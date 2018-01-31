@@ -1,0 +1,2413 @@
+{
+  "contractName": "Marketplace",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "jobId",
+          "type": "uint256"
+        }
+      ],
+      "name": "requestJob",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "providerName",
+          "type": "string"
+        },
+        {
+          "name": "paymentAmountInWei",
+          "type": "uint256"
+        },
+        {
+          "name": "providerUportId",
+          "type": "string"
+        }
+      ],
+      "name": "addJobOffer",
+      "outputs": [
+        {
+          "name": "jobIndex",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "jobs",
+      "outputs": [
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "provider",
+          "type": "address"
+        },
+        {
+          "name": "providerName",
+          "type": "string"
+        },
+        {
+          "name": "providerUportId",
+          "type": "string"
+        },
+        {
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "name": "created",
+          "type": "uint256"
+        },
+        {
+          "name": "paymentAmountInWei",
+          "type": "uint256"
+        },
+        {
+          "name": "request",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "jobRequests",
+      "outputs": [
+        {
+          "name": "requestorAddress",
+          "type": "address"
+        },
+        {
+          "name": "requestorName",
+          "type": "string"
+        },
+        {
+          "name": "requestorUportId",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getJobsCount",
+      "outputs": [
+        {
+          "name": "jobsCount",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "title",
+          "type": "string"
+        }
+      ],
+      "name": "JobAdded",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x6060604052341561000f57600080fd5b336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550610e348061005e6000396000f30060606040526004361061006c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168062440b311461007157806311f8b8ce14610094578063180aedf3146101d75780639f85840d14610528578063d07e9f90146106a6575b600080fd5b341561007c57600080fd5b61009260048080359060200190919050506106cf565b005b341561009f57600080fd5b6101c1600480803590602001908201803590602001908080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509190803590602001908201803590602001908080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509190803590602001908201803590602001908080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509190803590602001909190803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091905050610796565b6040518082815260200191505060405180910390f35b34156101e257600080fd5b6101f86004808035906020019091905050610a5c565b6040518080602001806020018a73ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018060200180602001806020018981526020018881526020018773ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200186810386528f8181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156103015780601f106102d657610100808354040283529160200191610301565b820191906000526020600020905b8154815290600101906020018083116102e457829003601f168201915b505086810385528e8181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156103845780601f1061035957610100808354040283529160200191610384565b820191906000526020600020905b81548152906001019060200180831161036757829003601f168201915b505086810384528c8181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156104075780601f106103dc57610100808354040283529160200191610407565b820191906000526020600020905b8154815290600101906020018083116103ea57829003601f168201915b505086810383528b81815460018160011615610100020316600290048152602001915080546001816001161561010002031660029004801561048a5780601f1061045f5761010080835404028352916020019161048a565b820191906000526020600020905b81548152906001019060200180831161046d57829003601f168201915b505086810382528a81815460018160011615610100020316600290048152602001915080546001816001161561010002031660029004801561050d5780601f106104e25761010080835404028352916020019161050d565b820191906000526020600020905b8154815290600101906020018083116104f057829003601f168201915b50509e50505050505050505050505050505060405180910390f35b341561053357600080fd5b6105526004808035906020019091908035906020019091905050610af4565b604051808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200180602001806020018381038352858181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156106115780601f106105e657610100808354040283529160200191610611565b820191906000526020600020905b8154815290600101906020018083116105f457829003601f168201915b50508381038252848181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156106945780601f1061066957610100808354040283529160200191610694565b820191906000526020600020905b81548152906001019060200180831161067757829003601f168201915b50509550505050505060405180910390f35b34156106b157600080fd5b6106b9610b64565b6040518082815260200191505060405180910390f35b60006001828154811015156106e057fe5b90600052602060002090600902019050600073ffffffffffffffffffffffffffffffffffffffff168160080160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1614151561074f57600080fd5b338160080160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505050565b60006107a0610b71565b84816060018190525033816040019073ffffffffffffffffffffffffffffffffffffffff16908173ffffffffffffffffffffffffffffffffffffffff1681525050858160200181905250868160000181905250428160c00181815250506040805190810160405280600781526020017f43726561746564000000000000000000000000000000000000000000000000008152508160a00181905250828160800181905250838160e001818152505060018080548060010182816108639190610c08565b916000526020600020906009020160008490919091506000820151816000019080519060200190610895929190610c3a565b5060208201518160010190805190602001906108b2929190610c3a565b5060408201518160020160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506060820151816003019080519060200190610916929190610c3a565b506080820151816004019080519060200190610933929190610c3a565b5060a0820151816005019080519060200190610950929190610c3a565b5060c0820151816006015560e082015181600701556101008201518160080160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505050039150817fd20cd5a820b437a8b626451f79bea6c725fee49b38cec46c1b7eb12b44d40953886040518080602001828103825283818151815260200191508051906020019080838360005b83811015610a155780820151818401526020810190506109fa565b50505050905090810190601f168015610a425780820380516001836020036101000a031916815260200191505b509250505060405180910390a28191505095945050505050565b600181815481101515610a6b57fe5b9060005260206000209060090201600091509050806000019080600101908060020160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060030190806004019080600501908060060154908060070154908060080160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905089565b600282815481101515610b0357fe5b906000526020600020900181815481101515610b1b57fe5b9060005260206000209060030201600091509150508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1690806001019080600201905083565b6000600180549050905090565b61012060405190810160405280610b86610cba565b8152602001610b93610cba565b8152602001600073ffffffffffffffffffffffffffffffffffffffff168152602001610bbd610cba565b8152602001610bca610cba565b8152602001610bd7610cba565b81526020016000815260200160008152602001600073ffffffffffffffffffffffffffffffffffffffff1681525090565b815481835581811511610c3557600902816009028360005260206000209182019101610c349190610cce565b5b505050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f10610c7b57805160ff1916838001178555610ca9565b82800160010185558215610ca9579182015b82811115610ca8578251825591602001919060010190610c8d565b5b509050610cb69190610d9b565b5090565b602060405190810160405280600081525090565b610d9891905b80821115610d945760008082016000610ced9190610dc0565b600182016000610cfd9190610dc0565b6002820160006101000a81549073ffffffffffffffffffffffffffffffffffffffff0219169055600382016000610d349190610dc0565b600482016000610d449190610dc0565b600582016000610d549190610dc0565b600682016000905560078201600090556008820160006101000a81549073ffffffffffffffffffffffffffffffffffffffff021916905550600901610cd4565b5090565b90565b610dbd91905b80821115610db9576000816000905550600101610da1565b5090565b90565b50805460018160011615610100020316600290046000825580601f10610de65750610e05565b601f016020900490600052602060002090810190610e049190610d9b565b5b505600a165627a7a72305820713185b3f8c5fd9a887a6e420e1fc81da09562c5e5a84d2cd8436ca8a1f190180029",
+  "deployedBytecode": "0x60606040526004361061006c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168062440b311461007157806311f8b8ce14610094578063180aedf3146101d75780639f85840d14610528578063d07e9f90146106a6575b600080fd5b341561007c57600080fd5b61009260048080359060200190919050506106cf565b005b341561009f57600080fd5b6101c1600480803590602001908201803590602001908080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509190803590602001908201803590602001908080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509190803590602001908201803590602001908080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509190803590602001909190803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091905050610796565b6040518082815260200191505060405180910390f35b34156101e257600080fd5b6101f86004808035906020019091905050610a5c565b6040518080602001806020018a73ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018060200180602001806020018981526020018881526020018773ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200186810386528f8181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156103015780601f106102d657610100808354040283529160200191610301565b820191906000526020600020905b8154815290600101906020018083116102e457829003601f168201915b505086810385528e8181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156103845780601f1061035957610100808354040283529160200191610384565b820191906000526020600020905b81548152906001019060200180831161036757829003601f168201915b505086810384528c8181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156104075780601f106103dc57610100808354040283529160200191610407565b820191906000526020600020905b8154815290600101906020018083116103ea57829003601f168201915b505086810383528b81815460018160011615610100020316600290048152602001915080546001816001161561010002031660029004801561048a5780601f1061045f5761010080835404028352916020019161048a565b820191906000526020600020905b81548152906001019060200180831161046d57829003601f168201915b505086810382528a81815460018160011615610100020316600290048152602001915080546001816001161561010002031660029004801561050d5780601f106104e25761010080835404028352916020019161050d565b820191906000526020600020905b8154815290600101906020018083116104f057829003601f168201915b50509e50505050505050505050505050505060405180910390f35b341561053357600080fd5b6105526004808035906020019091908035906020019091905050610af4565b604051808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200180602001806020018381038352858181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156106115780601f106105e657610100808354040283529160200191610611565b820191906000526020600020905b8154815290600101906020018083116105f457829003601f168201915b50508381038252848181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156106945780601f1061066957610100808354040283529160200191610694565b820191906000526020600020905b81548152906001019060200180831161067757829003601f168201915b50509550505050505060405180910390f35b34156106b157600080fd5b6106b9610b64565b6040518082815260200191505060405180910390f35b60006001828154811015156106e057fe5b90600052602060002090600902019050600073ffffffffffffffffffffffffffffffffffffffff168160080160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1614151561074f57600080fd5b338160080160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505050565b60006107a0610b71565b84816060018190525033816040019073ffffffffffffffffffffffffffffffffffffffff16908173ffffffffffffffffffffffffffffffffffffffff1681525050858160200181905250868160000181905250428160c00181815250506040805190810160405280600781526020017f43726561746564000000000000000000000000000000000000000000000000008152508160a00181905250828160800181905250838160e001818152505060018080548060010182816108639190610c08565b916000526020600020906009020160008490919091506000820151816000019080519060200190610895929190610c3a565b5060208201518160010190805190602001906108b2929190610c3a565b5060408201518160020160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506060820151816003019080519060200190610916929190610c3a565b506080820151816004019080519060200190610933929190610c3a565b5060a0820151816005019080519060200190610950929190610c3a565b5060c0820151816006015560e082015181600701556101008201518160080160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505050039150817fd20cd5a820b437a8b626451f79bea6c725fee49b38cec46c1b7eb12b44d40953886040518080602001828103825283818151815260200191508051906020019080838360005b83811015610a155780820151818401526020810190506109fa565b50505050905090810190601f168015610a425780820380516001836020036101000a031916815260200191505b509250505060405180910390a28191505095945050505050565b600181815481101515610a6b57fe5b9060005260206000209060090201600091509050806000019080600101908060020160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060030190806004019080600501908060060154908060070154908060080160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905089565b600282815481101515610b0357fe5b906000526020600020900181815481101515610b1b57fe5b9060005260206000209060030201600091509150508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1690806001019080600201905083565b6000600180549050905090565b61012060405190810160405280610b86610cba565b8152602001610b93610cba565b8152602001600073ffffffffffffffffffffffffffffffffffffffff168152602001610bbd610cba565b8152602001610bca610cba565b8152602001610bd7610cba565b81526020016000815260200160008152602001600073ffffffffffffffffffffffffffffffffffffffff1681525090565b815481835581811511610c3557600902816009028360005260206000209182019101610c349190610cce565b5b505050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f10610c7b57805160ff1916838001178555610ca9565b82800160010185558215610ca9579182015b82811115610ca8578251825591602001919060010190610c8d565b5b509050610cb69190610d9b565b5090565b602060405190810160405280600081525090565b610d9891905b80821115610d945760008082016000610ced9190610dc0565b600182016000610cfd9190610dc0565b6002820160006101000a81549073ffffffffffffffffffffffffffffffffffffffff0219169055600382016000610d349190610dc0565b600482016000610d449190610dc0565b600582016000610d549190610dc0565b600682016000905560078201600090556008820160006101000a81549073ffffffffffffffffffffffffffffffffffffffff021916905550600901610cd4565b5090565b90565b610dbd91905b80821115610db9576000816000905550600101610da1565b5090565b90565b50805460018160011615610100020316600290046000825580601f10610de65750610e05565b601f016020900490600052602060002090810190610e049190610d9b565b5b505600a165627a7a72305820713185b3f8c5fd9a887a6e420e1fc81da09562c5e5a84d2cd8436ca8a1f190180029",
+  "sourceMap": "26:2268:0:-;;;2136:59;;;;;;;;2180:10;2172:5;;:18;;;;;;;;;;;;;;;;;;26:2268;;;;;;",
+  "deployedSourceMap": "26:2268:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1233:697;;;;;;;;;;;;;;;;;;;;;;;;;;623:606;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;69:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;95:33;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2199:93;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1233:697;1278:12;1293:4;1298:5;1293:11;;;;;;;;;;;;;;;;;;;;1278:26;;1334:42;1319:57;;:3;:11;;;;;;;;;;;;:57;;;1311:66;;;;;;;;1398:10;1384:3;:11;;;:24;;;;;;;;;;;;;;;;;;1233:697;;:::o;623:606::-;764:13;785:24;;:::i;:::-;840:12;816:8;:21;;:36;;;;878:10;858:8;:17;;:30;;;;;;;;;;;917:11;894:8;:20;;:34;;;;951:5;934:8;:14;;:22;;;;981:15;962:8;:16;;:34;;;;;1002:27;;;;;;;;;;;;;;;;;;:8;:15;;:27;;;;1062:15;1035:8;:24;;:42;;;;1113:18;1083:8;:27;;:48;;;;;1169:1;1149:4;:19;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;1159:8;1149:19;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:21;1138:32;;1186:8;1177:25;1196:5;1177:25;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:2;8:100;;;99:1;94:3;90;84:5;80:1;75:3;71;64:6;52:2;49:1;45:3;40:15;;8:100;;;12:14;3:109;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1216:8:0;1209:15;;623:606;;;;;;;;:::o;69:22::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;95:33::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;2199:93::-;2247:14;2276:4;:11;;;;2269:18;;2199:93;:::o;26:2268::-;;;;;;;;;;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;;;;;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;:::i;:::-;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o",
+  "source": "pragma solidity ^0.4.17;\n\ncontract Marketplace {\n\n  address owner;\n  JobOffer[] public jobs;\n  JobRequest[][] public jobRequests;\n  //mapping (uint => JobRequest[]) public jobRequests;\n  //mapping (uint => uint) jobRequestCount;\n\n  event JobAdded(uint indexed id, string title);\n\n  struct JobRequest {\n    address requestorAddress;\n    string requestorName;\n    string requestorUportId;\n  }\n\n  struct JobOffer {\n    string title;\n    string description;\n    address provider;\n    string providerName;\n    string providerUportId;\n    string status;\n    uint created;\n    uint paymentAmountInWei;\n    address request;\n  }\n\n  function addJobOffer(string title, string description, string providerName, uint paymentAmountInWei, string providerUportId) public returns (uint jobIndex) {\n    JobOffer memory jobOffer;\n\n    jobOffer.providerName = providerName;\n    jobOffer.provider = msg.sender;\n    jobOffer.description = description;\n    jobOffer.title = title;\n    jobOffer.created = block.timestamp;\n    jobOffer.status = \"Created\";\n    jobOffer.providerUportId = providerUportId;\n    jobOffer.paymentAmountInWei = paymentAmountInWei;\n\n    jobIndex = jobs.push(jobOffer)-1;\n\n    JobAdded(jobIndex, title);\n\n    return jobIndex;\n  }\n\n  function requestJob(uint jobId) public {\n    JobOffer job = jobs[jobId];\n\n    require(job.request == 0x0000000000000000000000000000000000000000);\n\n    job.request = msg.sender;\n\n    //address[] addresses = job.requests;\n    //addresses.push(msg.sender);\n\n    //job.requests = addresses;\n\n\n\n    //null check plz\n    //var currentCount = jobRequestCount[jobId];\n\n    /* JobRequest memory jobRequest; */\n\n    /* JobRequest[] storage j = JobRequest[](0); */\n\n    /* jobRequest.requestorAddress = msg.sender; */\n    /* jobRequest.requestorName = requestorName; */\n    /* jobRequest.requestorUportId = requestorUportId; */\n    /* jobRequests[jobId] = j; */\n\n    // .push(jobRequest);// = jobRequest;\n  }\n\n\n  /* function getRequestsForJob(uint jobId) public returns (JobRequest) { */\n  /*   JobRequest memory jobRequest; */\n  /*   jobRequest = jobRequests[jobId]; */\n  /*   return jobRequest; */\n  /* } */\n\n\n  function Marketplace() public {\n    owner = msg.sender;\n  }\n\n  function getJobsCount() public constant returns(uint jobsCount) {\n    return jobs.length;\n  }\n}\n",
+  "sourcePath": "/Users/theobohnen/Source/unlocktheblock/website/contracts/Marketplace.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/Users/theobohnen/Source/unlocktheblock/website/contracts/Marketplace.sol",
+      "exportedSymbols": {
+        "Marketplace": [
+          172
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".17"
+          ]
+        },
+        "id": 1,
+        "name": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            172
+          ],
+          "name": "Marketplace",
+          "scope": 173
+        },
+        "children": [
+          {
+            "attributes": {
+              "constant": false,
+              "name": "owner",
+              "scope": 172,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "address",
+              "value": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "address",
+                  "type": "address"
+                },
+                "id": 2,
+                "name": "ElementaryTypeName",
+                "src": "52:7:0"
+              }
+            ],
+            "id": 3,
+            "name": "VariableDeclaration",
+            "src": "52:13:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "jobs",
+              "scope": 172,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "struct Marketplace.JobOffer storage ref[] storage ref",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "length": null,
+                  "type": "struct Marketplace.JobOffer storage ref[] storage pointer"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "JobOffer",
+                      "referencedDeclaration": 42,
+                      "type": "struct Marketplace.JobOffer storage pointer"
+                    },
+                    "id": 4,
+                    "name": "UserDefinedTypeName",
+                    "src": "69:8:0"
+                  }
+                ],
+                "id": 5,
+                "name": "ArrayTypeName",
+                "src": "69:10:0"
+              }
+            ],
+            "id": 6,
+            "name": "VariableDeclaration",
+            "src": "69:22:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "jobRequests",
+              "scope": 172,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "struct Marketplace.JobRequest storage ref[] storage ref[] storage ref",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "length": null,
+                  "type": "struct Marketplace.JobRequest storage ref[] storage ref[] storage pointer"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "length": null,
+                      "type": "struct Marketplace.JobRequest storage ref[] storage pointer"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "JobRequest",
+                          "referencedDeclaration": 23,
+                          "type": "struct Marketplace.JobRequest storage pointer"
+                        },
+                        "id": 7,
+                        "name": "UserDefinedTypeName",
+                        "src": "95:10:0"
+                      }
+                    ],
+                    "id": 8,
+                    "name": "ArrayTypeName",
+                    "src": "95:12:0"
+                  }
+                ],
+                "id": 9,
+                "name": "ArrayTypeName",
+                "src": "95:14:0"
+              }
+            ],
+            "id": 10,
+            "name": "VariableDeclaration",
+            "src": "95:33:0"
+          },
+          {
+            "attributes": {
+              "anonymous": false,
+              "name": "JobAdded"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": true,
+                      "name": "id",
+                      "scope": 16,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 11,
+                        "name": "ElementaryTypeName",
+                        "src": "247:4:0"
+                      }
+                    ],
+                    "id": 12,
+                    "name": "VariableDeclaration",
+                    "src": "247:15:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "name": "title",
+                      "scope": 16,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 13,
+                        "name": "ElementaryTypeName",
+                        "src": "264:6:0"
+                      }
+                    ],
+                    "id": 14,
+                    "name": "VariableDeclaration",
+                    "src": "264:12:0"
+                  }
+                ],
+                "id": 15,
+                "name": "ParameterList",
+                "src": "246:31:0"
+              }
+            ],
+            "id": 16,
+            "name": "EventDefinition",
+            "src": "232:46:0"
+          },
+          {
+            "attributes": {
+              "canonicalName": "Marketplace.JobRequest",
+              "name": "JobRequest",
+              "scope": 172,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "requestorAddress",
+                  "scope": 23,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "address",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "type": "address"
+                    },
+                    "id": 17,
+                    "name": "ElementaryTypeName",
+                    "src": "306:7:0"
+                  }
+                ],
+                "id": 18,
+                "name": "VariableDeclaration",
+                "src": "306:24:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "requestorName",
+                  "scope": 23,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "string storage pointer",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string storage pointer"
+                    },
+                    "id": 19,
+                    "name": "ElementaryTypeName",
+                    "src": "336:6:0"
+                  }
+                ],
+                "id": 20,
+                "name": "VariableDeclaration",
+                "src": "336:20:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "requestorUportId",
+                  "scope": 23,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "string storage pointer",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string storage pointer"
+                    },
+                    "id": 21,
+                    "name": "ElementaryTypeName",
+                    "src": "362:6:0"
+                  }
+                ],
+                "id": 22,
+                "name": "VariableDeclaration",
+                "src": "362:23:0"
+              }
+            ],
+            "id": 23,
+            "name": "StructDefinition",
+            "src": "282:108:0"
+          },
+          {
+            "attributes": {
+              "canonicalName": "Marketplace.JobOffer",
+              "name": "JobOffer",
+              "scope": 172,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "title",
+                  "scope": 42,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "string storage pointer",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string storage pointer"
+                    },
+                    "id": 24,
+                    "name": "ElementaryTypeName",
+                    "src": "416:6:0"
+                  }
+                ],
+                "id": 25,
+                "name": "VariableDeclaration",
+                "src": "416:12:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "description",
+                  "scope": 42,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "string storage pointer",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string storage pointer"
+                    },
+                    "id": 26,
+                    "name": "ElementaryTypeName",
+                    "src": "434:6:0"
+                  }
+                ],
+                "id": 27,
+                "name": "VariableDeclaration",
+                "src": "434:18:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "provider",
+                  "scope": 42,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "address",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "type": "address"
+                    },
+                    "id": 28,
+                    "name": "ElementaryTypeName",
+                    "src": "458:7:0"
+                  }
+                ],
+                "id": 29,
+                "name": "VariableDeclaration",
+                "src": "458:16:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "providerName",
+                  "scope": 42,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "string storage pointer",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string storage pointer"
+                    },
+                    "id": 30,
+                    "name": "ElementaryTypeName",
+                    "src": "480:6:0"
+                  }
+                ],
+                "id": 31,
+                "name": "VariableDeclaration",
+                "src": "480:19:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "providerUportId",
+                  "scope": 42,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "string storage pointer",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string storage pointer"
+                    },
+                    "id": 32,
+                    "name": "ElementaryTypeName",
+                    "src": "505:6:0"
+                  }
+                ],
+                "id": 33,
+                "name": "VariableDeclaration",
+                "src": "505:22:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "status",
+                  "scope": 42,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "string storage pointer",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string storage pointer"
+                    },
+                    "id": 34,
+                    "name": "ElementaryTypeName",
+                    "src": "533:6:0"
+                  }
+                ],
+                "id": 35,
+                "name": "VariableDeclaration",
+                "src": "533:13:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "created",
+                  "scope": 42,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 36,
+                    "name": "ElementaryTypeName",
+                    "src": "552:4:0"
+                  }
+                ],
+                "id": 37,
+                "name": "VariableDeclaration",
+                "src": "552:12:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "paymentAmountInWei",
+                  "scope": 42,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 38,
+                    "name": "ElementaryTypeName",
+                    "src": "570:4:0"
+                  }
+                ],
+                "id": 39,
+                "name": "VariableDeclaration",
+                "src": "570:23:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "request",
+                  "scope": 42,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "address",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "type": "address"
+                    },
+                    "id": 40,
+                    "name": "ElementaryTypeName",
+                    "src": "599:7:0"
+                  }
+                ],
+                "id": 41,
+                "name": "VariableDeclaration",
+                "src": "599:15:0"
+              }
+            ],
+            "id": 42,
+            "name": "StructDefinition",
+            "src": "394:225:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "addJobOffer",
+              "payable": false,
+              "scope": 172,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "title",
+                      "scope": 127,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 43,
+                        "name": "ElementaryTypeName",
+                        "src": "644:6:0"
+                      }
+                    ],
+                    "id": 44,
+                    "name": "VariableDeclaration",
+                    "src": "644:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "description",
+                      "scope": 127,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 45,
+                        "name": "ElementaryTypeName",
+                        "src": "658:6:0"
+                      }
+                    ],
+                    "id": 46,
+                    "name": "VariableDeclaration",
+                    "src": "658:18:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "providerName",
+                      "scope": 127,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 47,
+                        "name": "ElementaryTypeName",
+                        "src": "678:6:0"
+                      }
+                    ],
+                    "id": 48,
+                    "name": "VariableDeclaration",
+                    "src": "678:19:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "paymentAmountInWei",
+                      "scope": 127,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 49,
+                        "name": "ElementaryTypeName",
+                        "src": "699:4:0"
+                      }
+                    ],
+                    "id": 50,
+                    "name": "VariableDeclaration",
+                    "src": "699:23:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "providerUportId",
+                      "scope": 127,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 51,
+                        "name": "ElementaryTypeName",
+                        "src": "724:6:0"
+                      }
+                    ],
+                    "id": 52,
+                    "name": "VariableDeclaration",
+                    "src": "724:22:0"
+                  }
+                ],
+                "id": 53,
+                "name": "ParameterList",
+                "src": "643:104:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "jobIndex",
+                      "scope": 127,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 54,
+                        "name": "ElementaryTypeName",
+                        "src": "764:4:0"
+                      }
+                    ],
+                    "id": 55,
+                    "name": "VariableDeclaration",
+                    "src": "764:13:0"
+                  }
+                ],
+                "id": 56,
+                "name": "ParameterList",
+                "src": "763:15:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "assignments": [
+                        null
+                      ],
+                      "initialValue": null
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "constant": false,
+                          "name": "jobOffer",
+                          "scope": 127,
+                          "stateVariable": false,
+                          "storageLocation": "memory",
+                          "type": "struct Marketplace.JobOffer memory",
+                          "value": null,
+                          "visibility": "internal"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "contractScope": null,
+                              "name": "JobOffer",
+                              "referencedDeclaration": 42,
+                              "type": "struct Marketplace.JobOffer storage pointer"
+                            },
+                            "id": 57,
+                            "name": "UserDefinedTypeName",
+                            "src": "785:8:0"
+                          }
+                        ],
+                        "id": 58,
+                        "name": "VariableDeclaration",
+                        "src": "785:24:0"
+                      }
+                    ],
+                    "id": 59,
+                    "name": "VariableDeclarationStatement",
+                    "src": "785:24:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "string memory"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "providerName",
+                              "referencedDeclaration": 31,
+                              "type": "string memory"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 58,
+                                  "type": "struct Marketplace.JobOffer memory",
+                                  "value": "jobOffer"
+                                },
+                                "id": 60,
+                                "name": "Identifier",
+                                "src": "816:8:0"
+                              }
+                            ],
+                            "id": 62,
+                            "name": "MemberAccess",
+                            "src": "816:21:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 48,
+                              "type": "string memory",
+                              "value": "providerName"
+                            },
+                            "id": 63,
+                            "name": "Identifier",
+                            "src": "840:12:0"
+                          }
+                        ],
+                        "id": 64,
+                        "name": "Assignment",
+                        "src": "816:36:0"
+                      }
+                    ],
+                    "id": 65,
+                    "name": "ExpressionStatement",
+                    "src": "816:36:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "address"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "provider",
+                              "referencedDeclaration": 29,
+                              "type": "address"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 58,
+                                  "type": "struct Marketplace.JobOffer memory",
+                                  "value": "jobOffer"
+                                },
+                                "id": 66,
+                                "name": "Identifier",
+                                "src": "858:8:0"
+                              }
+                            ],
+                            "id": 68,
+                            "name": "MemberAccess",
+                            "src": "858:17:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "sender",
+                              "referencedDeclaration": null,
+                              "type": "address"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 184,
+                                  "type": "msg",
+                                  "value": "msg"
+                                },
+                                "id": 69,
+                                "name": "Identifier",
+                                "src": "878:3:0"
+                              }
+                            ],
+                            "id": 70,
+                            "name": "MemberAccess",
+                            "src": "878:10:0"
+                          }
+                        ],
+                        "id": 71,
+                        "name": "Assignment",
+                        "src": "858:30:0"
+                      }
+                    ],
+                    "id": 72,
+                    "name": "ExpressionStatement",
+                    "src": "858:30:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "string memory"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "description",
+                              "referencedDeclaration": 27,
+                              "type": "string memory"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 58,
+                                  "type": "struct Marketplace.JobOffer memory",
+                                  "value": "jobOffer"
+                                },
+                                "id": 73,
+                                "name": "Identifier",
+                                "src": "894:8:0"
+                              }
+                            ],
+                            "id": 75,
+                            "name": "MemberAccess",
+                            "src": "894:20:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 46,
+                              "type": "string memory",
+                              "value": "description"
+                            },
+                            "id": 76,
+                            "name": "Identifier",
+                            "src": "917:11:0"
+                          }
+                        ],
+                        "id": 77,
+                        "name": "Assignment",
+                        "src": "894:34:0"
+                      }
+                    ],
+                    "id": 78,
+                    "name": "ExpressionStatement",
+                    "src": "894:34:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "string memory"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "title",
+                              "referencedDeclaration": 25,
+                              "type": "string memory"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 58,
+                                  "type": "struct Marketplace.JobOffer memory",
+                                  "value": "jobOffer"
+                                },
+                                "id": 79,
+                                "name": "Identifier",
+                                "src": "934:8:0"
+                              }
+                            ],
+                            "id": 81,
+                            "name": "MemberAccess",
+                            "src": "934:14:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 44,
+                              "type": "string memory",
+                              "value": "title"
+                            },
+                            "id": 82,
+                            "name": "Identifier",
+                            "src": "951:5:0"
+                          }
+                        ],
+                        "id": 83,
+                        "name": "Assignment",
+                        "src": "934:22:0"
+                      }
+                    ],
+                    "id": 84,
+                    "name": "ExpressionStatement",
+                    "src": "934:22:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "created",
+                              "referencedDeclaration": 37,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 58,
+                                  "type": "struct Marketplace.JobOffer memory",
+                                  "value": "jobOffer"
+                                },
+                                "id": 85,
+                                "name": "Identifier",
+                                "src": "962:8:0"
+                              }
+                            ],
+                            "id": 87,
+                            "name": "MemberAccess",
+                            "src": "962:16:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "timestamp",
+                              "referencedDeclaration": null,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 176,
+                                  "type": "block",
+                                  "value": "block"
+                                },
+                                "id": 88,
+                                "name": "Identifier",
+                                "src": "981:5:0"
+                              }
+                            ],
+                            "id": 89,
+                            "name": "MemberAccess",
+                            "src": "981:15:0"
+                          }
+                        ],
+                        "id": 90,
+                        "name": "Assignment",
+                        "src": "962:34:0"
+                      }
+                    ],
+                    "id": 91,
+                    "name": "ExpressionStatement",
+                    "src": "962:34:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "string memory"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "status",
+                              "referencedDeclaration": 35,
+                              "type": "string memory"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 58,
+                                  "type": "struct Marketplace.JobOffer memory",
+                                  "value": "jobOffer"
+                                },
+                                "id": 92,
+                                "name": "Identifier",
+                                "src": "1002:8:0"
+                              }
+                            ],
+                            "id": 94,
+                            "name": "MemberAccess",
+                            "src": "1002:15:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "43726561746564",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "string",
+                              "type": "literal_string \"Created\"",
+                              "value": "Created"
+                            },
+                            "id": 95,
+                            "name": "Literal",
+                            "src": "1020:9:0"
+                          }
+                        ],
+                        "id": 96,
+                        "name": "Assignment",
+                        "src": "1002:27:0"
+                      }
+                    ],
+                    "id": 97,
+                    "name": "ExpressionStatement",
+                    "src": "1002:27:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "string memory"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "providerUportId",
+                              "referencedDeclaration": 33,
+                              "type": "string memory"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 58,
+                                  "type": "struct Marketplace.JobOffer memory",
+                                  "value": "jobOffer"
+                                },
+                                "id": 98,
+                                "name": "Identifier",
+                                "src": "1035:8:0"
+                              }
+                            ],
+                            "id": 100,
+                            "name": "MemberAccess",
+                            "src": "1035:24:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 52,
+                              "type": "string memory",
+                              "value": "providerUportId"
+                            },
+                            "id": 101,
+                            "name": "Identifier",
+                            "src": "1062:15:0"
+                          }
+                        ],
+                        "id": 102,
+                        "name": "Assignment",
+                        "src": "1035:42:0"
+                      }
+                    ],
+                    "id": 103,
+                    "name": "ExpressionStatement",
+                    "src": "1035:42:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "paymentAmountInWei",
+                              "referencedDeclaration": 39,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 58,
+                                  "type": "struct Marketplace.JobOffer memory",
+                                  "value": "jobOffer"
+                                },
+                                "id": 104,
+                                "name": "Identifier",
+                                "src": "1083:8:0"
+                              }
+                            ],
+                            "id": 106,
+                            "name": "MemberAccess",
+                            "src": "1083:27:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 50,
+                              "type": "uint256",
+                              "value": "paymentAmountInWei"
+                            },
+                            "id": 107,
+                            "name": "Identifier",
+                            "src": "1113:18:0"
+                          }
+                        ],
+                        "id": 108,
+                        "name": "Assignment",
+                        "src": "1083:48:0"
+                      }
+                    ],
+                    "id": 109,
+                    "name": "ExpressionStatement",
+                    "src": "1083:48:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 55,
+                              "type": "uint256",
+                              "value": "jobIndex"
+                            },
+                            "id": 110,
+                            "name": "Identifier",
+                            "src": "1138:8:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "commonType": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "-",
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "type": "uint256",
+                                  "type_conversion": false
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_struct$_JobOffer_$42_memory_ptr",
+                                          "typeString": "struct Marketplace.JobOffer memory"
+                                        }
+                                      ],
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "member_name": "push",
+                                      "referencedDeclaration": null,
+                                      "type": "function (struct Marketplace.JobOffer storage ref) returns (uint256)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 6,
+                                          "type": "struct Marketplace.JobOffer storage ref[] storage ref",
+                                          "value": "jobs"
+                                        },
+                                        "id": 111,
+                                        "name": "Identifier",
+                                        "src": "1149:4:0"
+                                      }
+                                    ],
+                                    "id": 112,
+                                    "name": "MemberAccess",
+                                    "src": "1149:9:0"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 58,
+                                      "type": "struct Marketplace.JobOffer memory",
+                                      "value": "jobOffer"
+                                    },
+                                    "id": 113,
+                                    "name": "Identifier",
+                                    "src": "1159:8:0"
+                                  }
+                                ],
+                                "id": 114,
+                                "name": "FunctionCall",
+                                "src": "1149:19:0"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "31",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": null,
+                                  "token": "number",
+                                  "type": "int_const 1",
+                                  "value": "1"
+                                },
+                                "id": 115,
+                                "name": "Literal",
+                                "src": "1169:1:0"
+                              }
+                            ],
+                            "id": 116,
+                            "name": "BinaryOperation",
+                            "src": "1149:21:0"
+                          }
+                        ],
+                        "id": 117,
+                        "name": "Assignment",
+                        "src": "1138:32:0"
+                      }
+                    ],
+                    "id": 118,
+                    "name": "ExpressionStatement",
+                    "src": "1138:32:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                },
+                                {
+                                  "typeIdentifier": "t_string_memory_ptr",
+                                  "typeString": "string memory"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 16,
+                              "type": "function (uint256,string memory)",
+                              "value": "JobAdded"
+                            },
+                            "id": 119,
+                            "name": "Identifier",
+                            "src": "1177:8:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 55,
+                              "type": "uint256",
+                              "value": "jobIndex"
+                            },
+                            "id": 120,
+                            "name": "Identifier",
+                            "src": "1186:8:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 44,
+                              "type": "string memory",
+                              "value": "title"
+                            },
+                            "id": 121,
+                            "name": "Identifier",
+                            "src": "1196:5:0"
+                          }
+                        ],
+                        "id": 122,
+                        "name": "FunctionCall",
+                        "src": "1177:25:0"
+                      }
+                    ],
+                    "id": 123,
+                    "name": "ExpressionStatement",
+                    "src": "1177:25:0"
+                  },
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 56
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "overloadedDeclarations": [
+                            null
+                          ],
+                          "referencedDeclaration": 55,
+                          "type": "uint256",
+                          "value": "jobIndex"
+                        },
+                        "id": 124,
+                        "name": "Identifier",
+                        "src": "1216:8:0"
+                      }
+                    ],
+                    "id": 125,
+                    "name": "Return",
+                    "src": "1209:15:0"
+                  }
+                ],
+                "id": 126,
+                "name": "Block",
+                "src": "779:450:0"
+              }
+            ],
+            "id": 127,
+            "name": "FunctionDefinition",
+            "src": "623:606:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "requestJob",
+              "payable": false,
+              "scope": 172,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "jobId",
+                      "scope": 153,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 128,
+                        "name": "ElementaryTypeName",
+                        "src": "1253:4:0"
+                      }
+                    ],
+                    "id": 129,
+                    "name": "VariableDeclaration",
+                    "src": "1253:10:0"
+                  }
+                ],
+                "id": 130,
+                "name": "ParameterList",
+                "src": "1252:12:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 131,
+                "name": "ParameterList",
+                "src": "1272:0:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "assignments": [
+                        133
+                      ]
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "constant": false,
+                          "name": "job",
+                          "scope": 153,
+                          "stateVariable": false,
+                          "storageLocation": "default",
+                          "type": "struct Marketplace.JobOffer storage pointer",
+                          "value": null,
+                          "visibility": "internal"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "contractScope": null,
+                              "name": "JobOffer",
+                              "referencedDeclaration": 42,
+                              "type": "struct Marketplace.JobOffer storage pointer"
+                            },
+                            "id": 132,
+                            "name": "UserDefinedTypeName",
+                            "src": "1278:8:0"
+                          }
+                        ],
+                        "id": 133,
+                        "name": "VariableDeclaration",
+                        "src": "1278:12:0"
+                      },
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "type": "struct Marketplace.JobOffer storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 6,
+                              "type": "struct Marketplace.JobOffer storage ref[] storage ref",
+                              "value": "jobs"
+                            },
+                            "id": 134,
+                            "name": "Identifier",
+                            "src": "1293:4:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 129,
+                              "type": "uint256",
+                              "value": "jobId"
+                            },
+                            "id": 135,
+                            "name": "Identifier",
+                            "src": "1298:5:0"
+                          }
+                        ],
+                        "id": 136,
+                        "name": "IndexAccess",
+                        "src": "1293:11:0"
+                      }
+                    ],
+                    "id": 137,
+                    "name": "VariableDeclarationStatement",
+                    "src": "1278:26:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 187,
+                              "type": "function (bool) pure",
+                              "value": "require"
+                            },
+                            "id": 138,
+                            "name": "Identifier",
+                            "src": "1311:7:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "commonType": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "==",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "request",
+                                  "referencedDeclaration": 41,
+                                  "type": "address"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 133,
+                                      "type": "struct Marketplace.JobOffer storage pointer",
+                                      "value": "job"
+                                    },
+                                    "id": 139,
+                                    "name": "Identifier",
+                                    "src": "1319:3:0"
+                                  }
+                                ],
+                                "id": 140,
+                                "name": "MemberAccess",
+                                "src": "1319:11:0"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "307830303030303030303030303030303030303030303030303030303030303030303030303030303030",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": null,
+                                  "token": "number",
+                                  "type": "address",
+                                  "value": "0x0000000000000000000000000000000000000000"
+                                },
+                                "id": 141,
+                                "name": "Literal",
+                                "src": "1334:42:0"
+                              }
+                            ],
+                            "id": 142,
+                            "name": "BinaryOperation",
+                            "src": "1319:57:0"
+                          }
+                        ],
+                        "id": 143,
+                        "name": "FunctionCall",
+                        "src": "1311:66:0"
+                      }
+                    ],
+                    "id": 144,
+                    "name": "ExpressionStatement",
+                    "src": "1311:66:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "address"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "request",
+                              "referencedDeclaration": 41,
+                              "type": "address"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 133,
+                                  "type": "struct Marketplace.JobOffer storage pointer",
+                                  "value": "job"
+                                },
+                                "id": 145,
+                                "name": "Identifier",
+                                "src": "1384:3:0"
+                              }
+                            ],
+                            "id": 147,
+                            "name": "MemberAccess",
+                            "src": "1384:11:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "sender",
+                              "referencedDeclaration": null,
+                              "type": "address"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 184,
+                                  "type": "msg",
+                                  "value": "msg"
+                                },
+                                "id": 148,
+                                "name": "Identifier",
+                                "src": "1398:3:0"
+                              }
+                            ],
+                            "id": 149,
+                            "name": "MemberAccess",
+                            "src": "1398:10:0"
+                          }
+                        ],
+                        "id": 150,
+                        "name": "Assignment",
+                        "src": "1384:24:0"
+                      }
+                    ],
+                    "id": 151,
+                    "name": "ExpressionStatement",
+                    "src": "1384:24:0"
+                  }
+                ],
+                "id": 152,
+                "name": "Block",
+                "src": "1272:658:0"
+              }
+            ],
+            "id": 153,
+            "name": "FunctionDefinition",
+            "src": "1233:697:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": true,
+              "modifiers": [
+                null
+              ],
+              "name": "Marketplace",
+              "payable": false,
+              "scope": 172,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 154,
+                "name": "ParameterList",
+                "src": "2156:2:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 155,
+                "name": "ParameterList",
+                "src": "2166:0:0"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "address"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 3,
+                              "type": "address",
+                              "value": "owner"
+                            },
+                            "id": 156,
+                            "name": "Identifier",
+                            "src": "2172:5:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "sender",
+                              "referencedDeclaration": null,
+                              "type": "address"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 184,
+                                  "type": "msg",
+                                  "value": "msg"
+                                },
+                                "id": 157,
+                                "name": "Identifier",
+                                "src": "2180:3:0"
+                              }
+                            ],
+                            "id": 158,
+                            "name": "MemberAccess",
+                            "src": "2180:10:0"
+                          }
+                        ],
+                        "id": 159,
+                        "name": "Assignment",
+                        "src": "2172:18:0"
+                      }
+                    ],
+                    "id": 160,
+                    "name": "ExpressionStatement",
+                    "src": "2172:18:0"
+                  }
+                ],
+                "id": 161,
+                "name": "Block",
+                "src": "2166:29:0"
+              }
+            ],
+            "id": 162,
+            "name": "FunctionDefinition",
+            "src": "2136:59:0"
+          },
+          {
+            "attributes": {
+              "constant": true,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "getJobsCount",
+              "payable": false,
+              "scope": 172,
+              "stateMutability": "view",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 163,
+                "name": "ParameterList",
+                "src": "2220:2:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "jobsCount",
+                      "scope": 171,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 164,
+                        "name": "ElementaryTypeName",
+                        "src": "2247:4:0"
+                      }
+                    ],
+                    "id": 165,
+                    "name": "VariableDeclaration",
+                    "src": "2247:14:0"
+                  }
+                ],
+                "id": 166,
+                "name": "ParameterList",
+                "src": "2246:16:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 166
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "member_name": "length",
+                          "referencedDeclaration": null,
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 6,
+                              "type": "struct Marketplace.JobOffer storage ref[] storage ref",
+                              "value": "jobs"
+                            },
+                            "id": 167,
+                            "name": "Identifier",
+                            "src": "2276:4:0"
+                          }
+                        ],
+                        "id": 168,
+                        "name": "MemberAccess",
+                        "src": "2276:11:0"
+                      }
+                    ],
+                    "id": 169,
+                    "name": "Return",
+                    "src": "2269:18:0"
+                  }
+                ],
+                "id": 170,
+                "name": "Block",
+                "src": "2263:29:0"
+              }
+            ],
+            "id": 171,
+            "name": "FunctionDefinition",
+            "src": "2199:93:0"
+          }
+        ],
+        "id": 172,
+        "name": "ContractDefinition",
+        "src": "26:2268:0"
+      }
+    ],
+    "id": 173,
+    "name": "SourceUnit",
+    "src": "0:2295:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2018-01-31T21:02:19.014Z"
+}

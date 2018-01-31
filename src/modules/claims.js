@@ -65,12 +65,9 @@ export function getOrganisations(){
 
     dispatch({type: SET_ORGANISATIONS, value: organisations});
 
-    //var orgsCount = await contract.methods.getOrgsCount.call();
-    //console.log('orgs count', orgsCount);
   }
 }
 
-//await contract.addClaim(name, org, claimant, true, uportId);
 export function addClaim(name,claimantName, orgAddress, isPublic, uportId) {
   return async function(dispatch){
     dispatch({type:ADDING_CLAIM});
@@ -85,21 +82,3 @@ export function addClaim(name,claimantName, orgAddress, isPublic, uportId) {
     dispatch({type:CLAIM_ADDED, value:res});
   }
 }
-
-// export function attest(uportId, credentialName, credentialValue) {
-//   return async function(dispatch) {
-
-//     const toAttest = {
-//       sub: uportId,
-//       claim: { credentialName: credentialValue }
-//     };
-
-//     try{
-//       var attest = await uport.attestCredentials(toAttest);
-
-//       //dispatch({});
-//     }catch(e){
-//       console.log('attest error', e);
-//     }
-//   }
-// }
