@@ -15,7 +15,9 @@ if (typeof window.web3 !== 'undefined') {
 export const getAttestationContract = () => {
   //var address = "0xba930bb471be501ee0ce7dc48edc2ea851b00ddd";
 
-  var address = "0xc4a24e29985031c5f0a7a518167c0b91f7d4638d";
+  //var address = "0xc4a24e29985031c5f0a7a518167c0b91f7d4638d";
+
+  var address = "0x027f9dfe506d49b0636b61420731e0bae7fb9e3b";
 
   var contract = new web3.eth.Contract(attestationContract.abi, address);
 
@@ -25,7 +27,9 @@ export const getAttestationContract = () => {
 export const getMarketplaceContract = () => {
   //var address = "0x456dda64fa1621122fba26177ba0bf4629a51c11";
 
-  var address = "0x81616acbdfcadedf33221a6b7437610c9fefdad6";
+  //var address = "0x81616acbdfcadedf33221a6b7437610c9fefdad6";
+
+  var address = "0xc43ee53ecdaf83c7e9104e8b59fec06d75fdb2cc";
 
   var contract = new web3.eth.Contract(marketplaceContract.abi, address);
 

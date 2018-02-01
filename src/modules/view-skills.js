@@ -41,6 +41,9 @@ export function getClaimsForUser(searchField){
     for (var i = 0; i < count; i++){
       var claim = await contract.methods.claims(i).call();
       if (claim.claimant === searchField || claim.claimantName === searchField || claim.claimantUportId === searchField){
+        console.log('claim', claim);
+        console.log('sf', searchField);
+
         claims.push({...claim, id: i});
       }
     }

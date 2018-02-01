@@ -56,5 +56,12 @@ contract('Marketplace', function(accounts) {
     var jobOffer = await contract.jobs.call(0, {from: requestor});
     assert(jobOffer[5] == "Accepted");
   });
+
+  it("Can finish job", async () => {
+    await contract.finishJob(0);
+
+    var jobOffer = await contract.jobs.call(0, {from: requestor});
+    assert(jobOffer[5] == "Completed");
+  });
 });
 

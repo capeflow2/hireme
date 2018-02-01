@@ -57,7 +57,7 @@ class ViewJobs extends Component{
       } else if (this.props.jobOffers.applyForJobResult){
           return (<div className="full-height center-container">
               Job Request Submitted, it can take up to a minute to show and we will refresh once it's available. Please click below to see transaction or clear to view your jobs.
-              <button onClick={(e) => {e.preventDefault(); this.props.clear(); this.props.getMyJobOffers();}}>Clear</button>
+              <button onClick={(e) => {e.preventDefault(); this.props.clear(); this.props.getAllOpenJobOffers();}}>Clear</button>
 
 <a target="_blank" href={ "https://rinkeby.etherscan.io/tx/" + this.props.jobOffers.applyForJobResult }>View Transaction</a> 
           </div>);
@@ -90,7 +90,7 @@ class ViewJobs extends Component{
                                   <div>{ j.description }</div>
                                   <div>{ Number(j.paymentAmount).toFixed(6)}</div>
                                   <div>{ moment(new Date(j.created * 1000)).format("YYYY/MM/DD HH:mm") }</div>
-                                  <div>{!j.myJob ? <span>N/A</span> : <button onClick={(e) => { this.applyForJob(e, j.id)}}>Apply</button>}</div>
+                                  <div>{j.myJob ? <span>N/A</span> : <button onClick={(e) => { this.applyForJob(e, j.id)}}>Apply</button>}</div>
                               </div>
                           )
                       }

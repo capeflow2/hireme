@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import { acceptJob, addJob, getMyJobOffers, clear } from '../../modules/job-offers';
+import { finishJob, acceptJob, addJob, getMyJobOffers, clear } from '../../modules/job-offers';
 import { bindActionCreators } from 'redux'
 import {Redirect} from 'react-router-dom';
 import labels from '../../constants/labels';
@@ -48,6 +48,9 @@ class AddJob extends Component{
       this.props.addJob(this.state.title,this.state.description, this.state.providerName, this.state.paymentAmount, uportId);
   }
 
+    finishJob(id){
+      this.props.finishJob(id);
+    }
     accept(id, paymentAmount){
       this.props.acceptJob(id, paymentAmount);
     }
@@ -137,6 +140,12 @@ class AddJob extends Component{
                           <div>
                               Accept Offer
                           </div>
+                          <div>
+                              Complete Job
+                          </div>
+                          <div>
+                              Status
+                          </div>
                       </div>
                       {
                           this.props.jobOffers.myJobOffers.map(j =>
@@ -145,7 +154,9 @@ class AddJob extends Component{
                                   <div>{ Number(j.paymentAmount).toFixed(6)}</div>
                                   <div>{ moment(new Date(j.created * 1000)).format("YYYY/MM/DD HH:mm") }</div>
                                   <div>{ j.hasRequest ? <Link to={ "/viewskills?address=" + j.request }>View Skills</Link> : "None" }</div>
-                                  <div>{j.hasRequest ? <button onClick={(e) => { e.preventDefault(); this.accept(j.id, j.paymentAmountInWei); }}>Accept</button> : null}</div>
+                                  <div>{j.hasRequest && j.status != "Accepted" ? <button onClick={(e) => { e.preventDefault(); this.accept(j.id, j.paymentAmountInWei); }}>Accept</button> : "N/A"}</div>
+                                  <div>{j.status == "Accepted" ? <button onClick={(e) => { e.preventDefault(); this.finishJob(j.id); }}>Finish Job</button> : "N/A"}</div>
+                                  <div>{ j.status }</div>
                               </div>
                           )
                       }
@@ -166,7 +177,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     addJob,
     getMyJobOffers,
     clear,
-    acceptJob
+    acceptJob,
+    finishJob
     },dispatch);
 
 const AddJobContainer = connect(

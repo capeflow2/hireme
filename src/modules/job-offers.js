@@ -125,8 +125,9 @@ export function clear() {
 }
 
 
-export function acceptJob(id, paymentAmount) {
+export function finishJob(id, paymentAmount) {
   return async function(dispatch){
+    debugger;
 
     dispatch({type: ACCEPT_JOB_INITIATED});
 
@@ -135,7 +136,33 @@ export function acceptJob(id, paymentAmount) {
 
     var contract = getMarketplaceContract();
 
-    contract.methods.acceptJob(id).send({from: accounts[0], value: paymentAmount})
+    contract.methods.finishJob(id).send({from: accounts[0]})
+      .on('transactionHash', function(transactionHash){
+        dispatch({type: ACCEPT_JOB_COMPLETED, value: transactionHash});
+      })
+      .on('receipt', function(receipt){
+        console.log(receipt);
+      })
+      .on('confirmation', function(confirmationNumber, receipt){
+      })
+      .then(function(newContractInstance){
+        console.log(newContractInstance.options.address) // instance with the new contract address
+      });
+  };
+}
+
+export function acceptJob(id, paymentAmount) {
+  return async function(dispatch){
+    debugger;
+
+    dispatch({type: ACCEPT_JOB_INITIATED});
+
+    var accounts = await web3.eth.getAccounts();
+    var address = accounts[0];
+
+    var contract = getMarketplaceContract();
+
+    contract.methods.acceptJob(id).send({from: accounts[0], value: paymentAmount })
       .on('transactionHash', function(transactionHash){
         dispatch({type: ACCEPT_JOB_COMPLETED, value: transactionHash});
       })

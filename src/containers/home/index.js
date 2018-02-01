@@ -21,6 +21,9 @@ class Home extends Component {
         if (!this.props.profile && !nextProps.profile){
             this.props.loginUser();
         }
+        else if (!nextProps.profile){
+            this.props.loginUser();
+        }
     }
 
     render(){
@@ -37,7 +40,7 @@ class Home extends Component {
                 <Link to="/addjob" className="btn">Post / Accept Jobs</Link>
                 <LogoutButtonContainer />
 
-            </div>;
+            </div>
             <div className="full-height center-container">
                 <h4>Individual</h4>
                 <Link to="/addclaim" className="btn">{ labels.ADD_PROOF_OF_SKILL }</Link>

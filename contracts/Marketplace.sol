@@ -77,6 +77,7 @@ contract Marketplace {
     require(job.request != 0x0000000000000000000000000000000000000000);
 
     job.request.transfer(job.paymentAmountInWei);
+    job.status = "Completed";
     JobFinished(jobId);
   }
 
