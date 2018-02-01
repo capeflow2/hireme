@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
+import { Link } from 'react-router-dom'
 import { registerOrg } from '../../modules/register-organisation';
 
 import labels from '../../constants/labels'
@@ -45,12 +45,13 @@ class RegisterOrg extends Component {
       }else if (this.props.registerOrganisation.txid){
           return (
               <div className="center-container full-height">
-                  Your transaction has been submitted to the network. view it <a target="_blank" href={ "https://rinkeby.etherscan.io/tx/" + this.props.registerOrganisation.txid }>here</a>.
+                  Your transaction has been submitted to the network. View it <a target="_blank" href={ "https://rinkeby.etherscan.io/tx/" + this.props.registerOrganisation.txid }>here.</a>
               </div>);
 
       }else{
           return (
               <div className="contact-reg center-container full-height">
+               { <button style={{position:"absolute", left:"0", top: "15px"}}><Link to="/">Back</Link></button> }
                   <form className="contact100-form validate-form">
                       <div className="wrap-input100 validate-input" data-validate="Name is required">
                           <span className="label-input100">{labels.ENTER_ORG_NAME}</span>

@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { RingLoader } from 'react-spinners';
 import moment from 'moment';
+import {Link} from 'react-router-dom'
 
 import { verifyClaim, getUnverifiedClaims } from '../../modules/verify-claims';
 
@@ -69,6 +70,7 @@ class VerifyClaims extends Component {
     else{
           return (
             <div className="claims-container full-height">
+             { <button style={{position:"absolute", left:"0", top: "15px"}}><Link to="/">Back</Link></button> }
               <div className="claimsTable">
                 <div className="claimsRow">
                   <div style={{flex:"3",width:"350px"}}>

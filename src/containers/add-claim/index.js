@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import {Redirect} from 'react-router-dom';
 import labels from '../../constants/labels';
 import { RingLoader } from 'react-spinners';
+import {Link} from 'react-router-dom'
 
 class AddClaim extends Component{
 
@@ -82,7 +83,7 @@ class AddClaim extends Component{
                   loading={true}
               />
 
-              Busy Adding Proof of skill. Please accept in your browser wallet to confirm transaction. Please be patient, this can take up to a minute after you've accepted.
+              Busy Adding Qualification. Please accept in your browser wallet to confirm transaction. Please be patient, this can take up to a minute after you've accepted.
           </div>);
       } else if (this.props.claims.claimAddedResult){
           return (<div className="full-height center-container">
@@ -92,6 +93,7 @@ class AddClaim extends Component{
       }else if (this.props.claims.organisations){
           return (
               <div className="full-height center-container">
+               { <button style={{position:"absolute", left:"0", top: "15px"}}><Link to="/">Back</Link></button> }
                   <form className="contact100-form validate-form">
                       <div className="wrap-input100 validate-input">
                           <span className="label-input100">{labels.SELECT_ORGANISATION}</span>

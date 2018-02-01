@@ -36,7 +36,7 @@ class Home extends Component {
                 <h4>Organisation</h4>
                 <Link to="/registerorg" className="btn">{ labels.REGISTER_AS_ORG }</Link>
                 <Link to="/verifyclaims" className="btn">{ labels.VERIFY_CLAIMS }</Link>
-                <Link to="/viewskills" className="btn">View User Skills</Link>
+                <Link to="/viewskills" className="btn">{labels.VIEW_QUALIFICATIONS}</Link>
                 <Link to="/addjob" className="btn">Post / Accept Jobs</Link>
                 <LogoutButtonContainer />
 

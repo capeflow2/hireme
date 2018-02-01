@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { RingLoader } from 'react-spinners';
+import {Link} from 'react-router-dom'
 import moment from 'moment';
-
 import { getClaimsForUser } from '../../modules/view-skills';
 
 import labels from '../../constants/labels'
@@ -70,6 +70,7 @@ class ViewSkills extends Component {
 
           return (
             <div className="claims-container full-height">
+             { <button style={{position:"absolute", left:"0", top: "15px"}}><Link to="/">Back</Link></button> }
                 {this.state.showSearch ? search : null}
               <br/>
               <br/>
